@@ -52,7 +52,7 @@ func Get() Content {
 		Education: []Education{
 			{
 				Course:      "CST em Análise e Desenvolvimento de Sistemas",
-				Institution: "Multivix - Empresa Brasileira de Ensino Pesquisa e Extensão",
+				Institution: "Multivix - Empresa Brasileira de Ensino, Pesquisa e Extensão",
 				Period:      "Julho 2021 - Julho 2023",
 			},
 			{
