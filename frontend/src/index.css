@@ -1,0 +1,109 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Suisse Mono";
+  src: url("/fonts/Suisse-Intl-Mono.ttf") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Mallory Compact";
+  src: url("/fonts/MalloryCompactMedium.ttf") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Mallory Black";
+  src: url("/fonts/MalloryBlack.ttf") format("truetype");
+  font-display: swap;
+}
+
+@theme {
+  --font-mono-brand: "Suisse Mono", ui-monospace, monospace;
+  --font-body: "Mallory Compact", system-ui, sans-serif;
+  --font-display: "Mallory Black", system-ui, sans-serif;
+
+  --color-cream: #fff0e5;
+  --color-cream-dark: #16140f;
+  --color-mint: #eafdc6;
+  --color-sky: #d3f2ff;
+  --color-butter: #fffae5;
+  --color-coral: #ed6058;
+  --color-ink: #282c33;
+  --color-ink-soft: #4a4f58;
+  --color-surface: #ffffff;
+  --color-surface-dark: #20242c;
+
+  --shadow-brutal: 8px 8px 0px 0px var(--color-ink);
+  --shadow-brutal-lg: 14px 14px 0px 0px var(--color-ink);
+  --shadow-brutal-sm: 4px 4px 0px 0px var(--color-ink);
+
+  --animate-float: float 6s ease-in-out infinite;
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-14px); }
+  }
+}
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  background-color: var(--color-cream);
+  color: var(--color-ink);
+  transition: background-color 0.35s ease, color 0.35s ease;
+  background-image:
+    radial-gradient(circle, rgba(40, 44, 51, 0.14) 1px, transparent 1px);
+  background-size: 22px 22px;
+  cursor: url("/cursors/cursor-25.png") 4 4, auto;
+}
+
+a,
+button,
+abbr,
+input[type="submit"],
+[role="button"] {
+  cursor: url("/cursors/pointer-30.png") 6 3, pointer;
+}
+
+html.dark body {
+  background-color: var(--color-cream-dark);
+  color: #f4f1ea;
+  background-image:
+    radial-gradient(circle, rgba(237, 96, 88, 0.16) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+::selection {
+  background-color: var(--color-coral);
+  color: white;
+}
+
+/* Custom two-tone scrollbar to match the brutalist accent */
+::-webkit-scrollbar {
+  width: 12px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-ink);
+  border-radius: 999px;
+  border: 3px solid var(--color-cream);
+}
+html.dark ::-webkit-scrollbar-thumb {
+  border-color: var(--color-cream-dark);
+  background-color: var(--color-coral);
+}
