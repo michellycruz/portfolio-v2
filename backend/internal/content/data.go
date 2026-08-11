@@ -25,6 +25,20 @@ func Get() Content {
 		},
 		Experience: []Experience{
 			{
+				Company: "Hostbraza LTDA",
+				Role:    "Analista de Sistemas",
+				Period:  "Abril 2026 - Atual",
+				Bullets: []string{
+					"Desenvolvimento de plugins e aplicações para WordPress utilizando PHP, com apoio de IA para acelerar implementação, refatoração e testes.",
+					"Criação de aplicações e automações em PHP, Go e React, utilizando o Claude Code como assistente de desenvolvimento.",
+					"Administração e gerenciamento de servidores VPS, incluindo configuração, manutenção, monitoramento e otimização de ambientes Linux.",
+					"Atendimento N1 aos clientes de hospedagem.",
+					"Desenvolvimento orientado por IA (AI-Assisted Development), utilizando engenharia de prompts para geração de código, documentação e otimização de processos.",
+					"Correção de bugs, implementação de novas funcionalidades e manutenção de aplicações web.",
+				},
+				Results: "Aumento da produtividade no desenvolvimento através do uso estratégico de IA, redução do tempo de entrega de funcionalidades, resolução ágil de chamados técnicos e melhoria da experiência dos clientes de hospedagem.",
+			},
+			{
 				Company: "Secretaria de Estado da Educação - SEDU",
 				Role:    "Analista de Sistemas",
 				Period:  "Outubro 2023 - Setembro 2024",

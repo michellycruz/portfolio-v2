@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @font-face {
   font-family: "Suisse Mono";
   src: url("/fonts/Suisse-Intl-Mono.ttf") format("truetype");

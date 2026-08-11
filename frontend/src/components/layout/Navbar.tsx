@@ -53,7 +53,7 @@ export function Navbar() {
           <button
             onClick={toggle}
             aria-label="Alternar tema"
-            className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-ink bg-ink text-white shadow-brutal-sm transition-transform hover:-translate-y-0.5 dark:border-white/70 dark:bg-coral"
+            className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-cream/70 bg-ink text-white shadow-brutal-sm transition-transform hover:-translate-y-0.5 dark:border-white/70 dark:bg-coral"
           >
             {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
           </button>
@@ -74,7 +74,7 @@ export function Navbar() {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className="flex flex-col gap-1 overflow-hidden border-t-2 border-ink bg-cream px-5 pb-4 md:hidden dark:border-white/70 dark:bg-cream-dark"
+            className="absolute inset-x-0 top-full z-40 flex flex-col gap-1 overflow-hidden border-t-2 border-ink bg-cream px-5 pb-4 shadow-brutal md:hidden dark:border-white/70 dark:bg-cream-dark"
           >
             {links.map((link) => (
               <li key={link.href}>
