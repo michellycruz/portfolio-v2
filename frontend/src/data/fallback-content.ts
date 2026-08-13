@@ -5,7 +5,7 @@ import type { Content } from "../types/content";
 export const fallbackContent: Content = {
   profile: {
     name: "Michelly Cruz",
-    role: "Analista de TI",
+    role: "Analista de Sistemas",
     location: "Espírito Santo, Brasil",
     summary: [
       "Analista de Sistemas na Hostbraza, onde transito entre desenvolvimento, infraestrutura e atendimento: crio plugins e aplicações para WordPress em PHP, desenvolvo aplicações e automações em PHP, Go e React com apoio de IA, administro servidores VPS em ambiente Linux e atendo clientes de hospedagem.",

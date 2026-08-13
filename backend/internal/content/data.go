@@ -7,7 +7,7 @@ func Get() Content {
 	return Content{
 		Profile: Profile{
 			Name:     "Michelly Cruz",
-			Role:     "Analista de TI",
+			Role:     "Analista de Sistemas",
 			Location: "Espírito Santo, Brasil",
 			Summary: []string{
 				"Analista de Sistemas na Hostbraza, onde transito entre desenvolvimento, infraestrutura e atendimento: crio plugins e aplicações para WordPress em PHP, desenvolvo aplicações e automações em PHP, Go e React com apoio de IA, administro servidores VPS em ambiente Linux e atendo clientes de hospedagem.",
