@@ -4,12 +4,18 @@ export interface SocialLink {
   icon: string;
 }
 
+export interface BehaviorTrait {
+  label: string;
+  percent: number;
+}
+
 export interface Profile {
   name: string;
   role: string;
   location: string;
   summary: string[];
   profileBadge: string;
+  behavior: BehaviorTrait[];
   photoUrl: string;
   resumeUrl: string;
   social: SocialLink[];

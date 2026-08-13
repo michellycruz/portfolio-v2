@@ -10,10 +10,16 @@ func Get() Content {
 			Role:     "Analista de TI",
 			Location: "Espírito Santo, Brasil",
 			Summary: []string{
-				"Analista de TI com experiência em atendimento a usuários via GLPI, resolução de problemas em sistemas e consultas em SQL Server. Atuei em ambientes com grande volume de chamados, realizando mapeamento de processos, documentação técnica e testes de sistemas.",
-				"Tenho vivência em metodologias ágeis, gestão de contratos de TI e comunicação com fornecedores. Busco contribuir em equipes de suporte, unindo conhecimento técnico e habilidade de atendimento para garantir soluções ágeis e eficientes.",
+				"Analista de Sistemas na Hostbraza, onde transito entre desenvolvimento, infraestrutura e atendimento: crio plugins e aplicações para WordPress em PHP, desenvolvo aplicações e automações em PHP, Go e React com apoio de IA, administro servidores VPS em ambiente Linux e atendo clientes de hospedagem.",
+				"Venho do suporte técnico e da análise de sistemas, com vivência em atendimento via GLPI, consultas SQL, levantamento de requisitos, documentação técnica e protótipos em Figma e Balsamiq. Dessa origem trago o hábito de documentar, testar e traduzir necessidade de negócio em solução técnica.",
 			},
 			ProfileBadge: "Planejador Analista (PA)",
+			Behavior: []BehaviorTrait{
+				{Label: "Executor", Percent: 13},
+				{Label: "Comunicador", Percent: 22},
+				{Label: "Planejador", Percent: 33},
+				{Label: "Analista", Percent: 33},
+			},
 			PhotoURL:     "/images/foto-pessoal.png",
 			ResumeURL:    "/resume/curriculo_michelly.pdf",
 			Social: []SocialLink{

@@ -8,10 +8,16 @@ export const fallbackContent: Content = {
     role: "Analista de TI",
     location: "Espírito Santo, Brasil",
     summary: [
-      "Analista de TI com experiência em atendimento a usuários via GLPI, resolução de problemas em sistemas e consultas em SQL Server. Atuei em ambientes com grande volume de chamados, realizando mapeamento de processos, documentação técnica e testes de sistemas.",
-      "Tenho vivência em metodologias ágeis, gestão de contratos de TI e comunicação com fornecedores. Busco contribuir em equipes de suporte, unindo conhecimento técnico e habilidade de atendimento para garantir soluções ágeis e eficientes.",
+      "Analista de Sistemas na Hostbraza, onde transito entre desenvolvimento, infraestrutura e atendimento: crio plugins e aplicações para WordPress em PHP, desenvolvo aplicações e automações em PHP, Go e React com apoio de IA, administro servidores VPS em ambiente Linux e atendo clientes de hospedagem.",
+      "Venho do suporte técnico e da análise de sistemas, com vivência em atendimento via GLPI, consultas SQL, levantamento de requisitos, documentação técnica e protótipos em Figma e Balsamiq. Dessa origem trago o hábito de documentar, testar e traduzir necessidade de negócio em solução técnica.",
     ],
     profileBadge: "Planejador Analista (PA)",
+    behavior: [
+      { label: "Executor", percent: 13 },
+      { label: "Comunicador", percent: 22 },
+      { label: "Planejador", percent: 33 },
+      { label: "Analista", percent: 33 },
+    ],
     photoUrl: "/images/foto-pessoal.png",
     resumeUrl: "/resume/curriculo_michelly.pdf",
     social: [

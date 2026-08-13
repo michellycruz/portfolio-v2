@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Download } from "lucide-react";
 import type { Profile } from "../../types/content";
 import { Panel, PanelBody, PanelTitle } from "../ui/Panel";
+import { BehaviorChart } from "../ui/BehaviorChart";
 import { Button } from "../ui/Button";
 import { socialIcon } from "../../lib/icons";
 
@@ -67,6 +68,10 @@ export function Hero({ profile }: { profile: Profile }) {
             <span className="inline-flex items-center gap-2 rounded-full border-2 border-ink bg-butter px-4 py-2 font-[var(--font-mono-brand)] text-xs font-semibold text-ink">
               {profile.profileBadge}
             </span>
+
+            <div className="mt-5 border-t-2 border-dashed border-ink/15 pt-4 dark:border-white/15">
+              <BehaviorChart traits={profile.behavior} />
+            </div>
           </PanelBody>
         </Panel>
       </motion.div>

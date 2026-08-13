@@ -7,13 +7,21 @@ type SocialLink struct {
 	Icon string `json:"icon"`
 }
 
+// BehaviorTrait is one axis of the behavioural profile assessment, shown as a
+// bar chart in the hero. Percent is 0-100.
+type BehaviorTrait struct {
+	Label   string `json:"label"`
+	Percent int    `json:"percent"`
+}
+
 // Profile holds the top-level personal/summary information.
 type Profile struct {
 	Name          string       `json:"name"`
 	Role          string       `json:"role"`
 	Location      string       `json:"location"`
 	Summary       []string     `json:"summary"`
-	ProfileBadge  string       `json:"profileBadge"`
+	ProfileBadge  string          `json:"profileBadge"`
+	Behavior      []BehaviorTrait `json:"behavior"`
 	PhotoURL      string       `json:"photoUrl"`
 	ResumeURL     string       `json:"resumeUrl"`
 	Social        []SocialLink `json:"social"`

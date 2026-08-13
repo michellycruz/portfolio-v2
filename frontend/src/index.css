@@ -50,6 +50,18 @@
 
 :root {
   color-scheme: light;
+
+  /* Behaviour-chart categorical palette. Both modes were validated against the
+     panel surfaces they render on (#ffffff light, #20242c dark): lightness band,
+     chroma floor, CVD separation and normal-vision floor all pass. The light
+     steps sit below 3:1 on white, which is allowed here because every bar
+     carries a visible percentage label. Do not re-step one slot in isolation —
+     the checks apply to the set. */
+  --viz-executor: #e34948;
+  --viz-comunicador: #eda100;
+  --viz-planejador: #1baf7a;
+  --viz-analista: #2a78d6;
+  --viz-track: #e1e0d9;
 }
 
 html {
@@ -58,6 +70,12 @@ html {
 
 html.dark {
   color-scheme: dark;
+
+  --viz-executor: #d03b3b;
+  --viz-comunicador: #c98500;
+  --viz-planejador: #199e70;
+  --viz-analista: #3987e5;
+  --viz-track: #2c2c2a;
 }
 
 body {
