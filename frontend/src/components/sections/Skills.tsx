@@ -26,7 +26,7 @@ export function Skills({ infraSkills, infraHighlights, categories }: SkillsProps
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.5, delay: i * 0.1 }}
           >
-            <Panel>
+            <Panel className="h-full">
               <PanelTitle accent={infraAccents[i % infraAccents.length]} className="text-base">
                 {skill.title}
               </PanelTitle>
