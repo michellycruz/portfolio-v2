@@ -9,7 +9,7 @@ export function Projects({ items }: { items: Project[] }) {
     <section id="projetos" className="mx-auto max-w-6xl px-5 py-16">
       <SectionHeading>Projetos</SectionHeading>
 
-      <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {items.map((project, i) => (
           <motion.a
             key={project.title}

@@ -8,7 +8,7 @@ import { socialIcon } from "../../lib/icons";
 
 export function Hero({ profile }: { profile: Profile }) {
   return (
-    <section id="topo" className="mx-auto grid max-w-6xl gap-12 px-5 pt-16 pb-8 md:grid-cols-[minmax(0,340px)_1fr] md:items-start md:pt-24">
+    <section id="topo" className="mx-auto grid max-w-6xl gap-12 px-5 pt-16 pb-16 md:grid-cols-[minmax(0,340px)_1fr] md:items-start md:pt-24">
       <motion.div
         initial={{ opacity: 0, x: -30 }}
         animate={{ opacity: 1, x: 0 }}

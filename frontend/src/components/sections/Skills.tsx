@@ -58,7 +58,7 @@ export function Skills({ infraSkills, infraHighlights, categories }: SkillsProps
         </Panel>
       </motion.div>
 
-      <h3 className="mt-20 mb-10 text-center font-[var(--font-mono-brand)] text-2xl text-ink dark:text-white">
+      <h3 className="mt-16 mb-10 text-center font-[var(--font-mono-brand)] text-2xl text-ink dark:text-white">
         Tecnologias
       </h3>
 
@@ -71,11 +71,13 @@ export function Skills({ infraSkills, infraHighlights, categories }: SkillsProps
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.5, delay: i * 0.1 }}
           >
-            <Panel noShadowOnHover className="h-full">
+            {/* Cards stretch to the tallest in the row, so categories with few
+                icons centre them instead of stacking the slack underneath. */}
+            <Panel noShadowOnHover className="flex h-full flex-col">
               <PanelTitle accent="none" className="text-base">
                 {cat.title}
               </PanelTitle>
-              <PanelBody>
+              <PanelBody className="flex flex-1 items-center justify-center">
                 <div className="flex flex-wrap justify-center gap-4">
                   {cat.skills.map((s) => (
                     <TechIcon key={s} skillKey={s} />
