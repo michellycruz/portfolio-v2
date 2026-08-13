@@ -3,6 +3,7 @@ import type { Education as EducationItem, Institution } from "../../types/conten
 import { FormationChart } from "../ui/FormationChart";
 import { InstitutionAccordion } from "../ui/InstitutionAccordion";
 import { Panel, PanelBody, PanelTitle } from "../ui/Panel";
+import { RobotScholar } from "../ui/RobotScholar";
 import { SectionHeading } from "../ui/SectionHeading";
 
 export function Education({ items, institutions }: { items: EducationItem[]; institutions: Institution[] }) {
@@ -11,16 +12,15 @@ export function Education({ items, institutions }: { items: EducationItem[]; ins
       <SectionHeading>Formação acadêmica</SectionHeading>
 
       <div className="flex items-start gap-8">
-        <motion.img
-          src="/images/robo2.png"
-          alt=""
-          aria-hidden="true"
+        <motion.div
           initial={{ opacity: 0, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.6 }}
           className="hidden w-56 shrink-0 animate-float select-none self-center lg:block"
-        />
+        >
+          <RobotScholar />
+        </motion.div>
 
         <Panel noShadowOnHover className="flex-1">
           <PanelTitle accent="sky">Trilha acadêmica</PanelTitle>

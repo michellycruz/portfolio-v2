@@ -1,5 +1,6 @@
 import type { SocialLink } from "../../types/content";
 import { socialIcon } from "../../lib/icons";
+import { RobotRocket } from "../ui/RobotRocket";
 
 const links = [
   { href: "#resumo", label: "Resumo" },
@@ -12,13 +13,10 @@ const links = [
 
 export function Footer({ social, name }: { social: SocialLink[]; name: string }) {
   return (
-    <footer className="relative mt-32 overflow-hidden border-t-2 border-ink bg-white/60 dark:border-white/70 dark:bg-white/5">
-      <img
-        src="/images/robo3.png"
-        alt=""
-        aria-hidden="true"
-        className="pointer-events-none absolute bottom-0 right-4 hidden w-32 select-none opacity-90 sm:block md:w-44"
-      />
+    <footer className="relative mt-32 border-t-2 border-ink bg-white/60 dark:border-white/70 dark:bg-white/5">
+      {/* Sits on top of the footer's border line, so it reads as landed on it.
+          The footer can't clip its overflow for this to work. */}
+      <RobotRocket className="pointer-events-none absolute right-8 bottom-full hidden w-32 translate-y-[9%] select-none sm:block md:w-44" />
       <div className="relative mx-auto flex max-w-6xl flex-col gap-10 px-5 py-14 sm:flex-row sm:justify-between">
         <div>
           <p className="mb-4 font-[var(--font-mono-brand)] text-lg text-ink dark:text-white">

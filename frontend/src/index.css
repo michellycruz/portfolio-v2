@@ -48,6 +48,82 @@
   }
 }
 
+/* Robots: the silhouette keeps the coral glow the old PNGs had, and the parts
+   move on their own timers so the idle loop never looks synchronised. */
+.robot {
+  overflow: visible;
+}
+
+.robot-glow {
+  filter: drop-shadow(0 0 5px rgba(237, 96, 88, 0.75));
+}
+
+/* Eyes squash shut briefly; the long pause between blinks is what reads as
+   alive rather than as a blinking cursor. */
+/* Each robot sets its own transform-origin inline, since the pivots live at
+   different coordinates in each drawing. */
+.robot-eyes {
+  animation: robot-blink 5.2s ease-in-out infinite;
+}
+
+@keyframes robot-blink {
+  0%, 92%, 100% { transform: scaleY(1); }
+  94% { transform: scaleY(0.08); }
+  96% { transform: scaleY(1); }
+  97.5% { transform: scaleY(0.08); }
+  99% { transform: scaleY(1); }
+}
+
+.robot-arm-left {
+  animation: robot-wave 4.4s ease-in-out infinite;
+}
+
+@keyframes robot-wave {
+  0%, 55%, 100% { transform: rotate(0deg); }
+  62% { transform: rotate(-13deg); }
+  70% { transform: rotate(4deg); }
+  78% { transform: rotate(-9deg); }
+  86% { transform: rotate(0deg); }
+}
+
+.robot-arm-right {
+  animation: robot-point 7s ease-in-out infinite;
+}
+
+@keyframes robot-point {
+  0%, 30%, 100% { transform: rotate(0deg); }
+  38%, 60% { transform: rotate(-7deg); }
+}
+
+/* Rocket: exhaust flickers fast, body sways slowly. */
+.robot-flame {
+  animation: robot-flame 0.42s ease-in-out infinite alternate;
+}
+
+@keyframes robot-flame {
+  from { transform: scaleY(0.82); opacity: 0.7; }
+  to { transform: scaleY(1.18); opacity: 1; }
+}
+
+.robot-hover {
+  animation: robot-hover 3.6s ease-in-out infinite;
+}
+
+@keyframes robot-hover {
+  0%, 100% { transform: rotate(-1.6deg); }
+  50% { transform: rotate(1.6deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .robot-eyes,
+  .robot-arm-left,
+  .robot-arm-right,
+  .robot-flame,
+  .robot-hover {
+    animation: none;
+  }
+}
+
 :root {
   color-scheme: light;
 

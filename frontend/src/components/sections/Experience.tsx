@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import type { Experience as ExperienceItem } from "../../types/content";
 import { Panel, PanelBody, PanelTitle } from "../ui/Panel";
+import { RobotMechanic } from "../ui/RobotMechanic";
 import { SectionHeading } from "../ui/SectionHeading";
 
 export function Experience({ items }: { items: ExperienceItem[] }) {
@@ -47,16 +48,15 @@ export function Experience({ items }: { items: ExperienceItem[] }) {
           </PanelBody>
         </Panel>
 
-        <motion.img
-          src="/images/robo1.png"
-          alt=""
-          aria-hidden="true"
+        <motion.div
           initial={{ opacity: 0, x: 20 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.6 }}
           className="hidden w-56 shrink-0 animate-float select-none self-center lg:block"
-        />
+        >
+          <RobotMechanic />
+        </motion.div>
       </div>
     </section>
   );
