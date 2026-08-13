@@ -92,6 +92,110 @@ export const fallbackContent: Content = {
       period: "Junho 2024 - Trancado em maio de 2025",
     },
   ],
+  institutions: [
+    {
+      name: "DIO - Digital Innovation One",
+      tracks: [
+        {
+          name: "Formação IA Generativa",
+          status: "Em andamento",
+          courses: [
+            { title: "Introdução aos Fundamentos de IA Generativa com a Universia", date: "Outubro 2025", hours: "1h", area: "IA e Automação" },
+            { title: "Aplicações e Impacto da IA no Mundo Atual", date: "Maio 2026", hours: "1h", area: "IA e Automação" },
+            { title: "Aplicações Práticas da Inteligência Artificial", date: "Maio 2026", hours: "2h", area: "IA e Automação" },
+            { title: "A Era da IA: Machine Learning, LLMs, IA Generativa e Agentes", date: "Maio 2026", hours: "2h", area: "IA e Automação" },
+            { title: "Introdução à Engenharia de Prompts", date: "Junho 2026", hours: "1h", area: "IA e Automação" },
+          ],
+        },
+        {
+          name: "Formação React",
+          status: "Em andamento",
+          courses: [
+            { title: "Configuração de Ambiente React", date: "Maio 2024", hours: "1h", area: "Front-end" },
+            { title: "Páginas Web com HTML", date: "Maio 2024", hours: "2h", area: "Front-end" },
+            { title: "Estilizando Páginas com CSS", date: "Maio 2024", hours: "1h", area: "Front-end" },
+            { title: "Tornando Páginas Web Interativas com JavaScript", date: "Maio 2024", hours: "2h", area: "Front-end" },
+            { title: "Entendendo a DOM (Document Object Model)", date: "Maio 2024", hours: "1h", area: "Front-end" },
+            { title: "Primeiros Passos na Biblioteca React", date: "Maio 2024", hours: "1h", area: "Front-end" },
+            { title: "Criando Uma Calculadora Com React", date: "Maio 2024", hours: "1h", area: "Front-end" },
+            { title: "Criando um Projeto React do Zero", date: "Junho 2024", hours: "1h", area: "Front-end" },
+            { title: "Convenções e Qualidade de Código React", date: "Junho 2024", hours: "1h", area: "Front-end" },
+          ],
+        },
+        {
+          name: "Formação DevOps",
+          status: "Em andamento",
+          courses: [
+            { title: "Onboarding - DevOps", date: "Junho 2025", hours: "1h", area: "Infra e DevOps" },
+            { title: "Entendendo O que é DevOps", date: "Junho 2025", hours: "1h", area: "Infra e DevOps" },
+            { title: "DevOps e Processos de Desenvolvimento de Software", date: "Junho 2025", hours: "1h", area: "Infra e DevOps" },
+            { title: "Introdução ao DevSecOps", date: "Junho 2025", hours: "1h", area: "Infra e DevOps" },
+            { title: "Qual é a diferença entre SRE e DevOps", date: "Junho 2025", hours: "1h", area: "Infra e DevOps" },
+            { title: "Introdução ao DevOps com CI/CD", date: "Junho 2025", hours: "1h", area: "Infra e DevOps" },
+            { title: "Criando seu Primeiro Projeto de DevOps com GitLab", date: "Junho 2025", hours: "1h", area: "Infra e DevOps" },
+            { title: "Cloud Computing e o DevOps", date: "Julho 2025", hours: "1h", area: "Infra e DevOps" },
+            { title: "Infraestrutura como Código no DevOps", date: "Julho 2025", hours: "1h", area: "Infra e DevOps" },
+          ],
+        },
+        {
+          name: "DIO Campus Expert (13ª turma)",
+          status: "Concluída",
+          courses: [
+            { title: "Onboarding | Boas-vindas ao DIO Campus Expert Turma 13", date: "Agosto 2025", hours: "1h", area: "Processos e Design" },
+            {
+              title: "Como desenvolver a sua Liderança e Protagonismo como embaixador(a) da DIO!",
+              date: "Agosto 2025",
+              hours: "2h",
+              area: "Processos e Design",
+            },
+            { title: "Programa DIO Campus Expert", date: "Agosto - Setembro 2025", hours: "30h", area: "Processos e Design" },
+          ],
+        },
+      ],
+    },
+    {
+      name: "Conquer Business School",
+      courses: [
+        {
+          title: "Inteligência Artificial: eleve sua produtividade e acelere sua carreira",
+          date: "Junho 2024",
+          hours: "10h",
+          area: "IA e Automação",
+        },
+      ],
+    },
+    {
+      name: "Curso em Vídeo",
+      courses: [
+        { title: "MySQL", date: "Fevereiro 2023", hours: "40h", area: "Dados e Fundamentos" },
+        { title: "Curso HTML5 e CSS3: Módulo 1 de 5", date: "Março 2023", hours: "40h", area: "Front-end" },
+        { title: "Curso HTML5 e CSS3: Módulo 2 de 5", date: "Abril 2023", hours: "40h", area: "Front-end" },
+        { title: "Curso HTML5 e CSS3: Módulo 3 de 5", date: "Abril 2023", hours: "40h", area: "Front-end" },
+        { title: "Curso HTML5 e CSS3: Módulo 4 de 5", date: "Maio 2023", hours: "40h", area: "Front-end" },
+        { title: "JavaScript", date: "Junho 2023", hours: "40h", area: "Front-end" },
+        { title: "Segurança da Informação: Módulo 00", date: "Setembro 2023", hours: "20h", area: "Infra e DevOps" },
+        { title: "Algoritmo", date: "Setembro 2025", hours: "40h", area: "Dados e Fundamentos" },
+      ],
+    },
+    {
+      name: "OneBitCode",
+      courses: [
+        { title: "Análise de Requisitos", date: "Abril 2024", area: "Processos e Design" },
+        { title: "Metodologias Ágeis - SCRUM", date: "Abril 2024", area: "Processos e Design" },
+        { title: "Web Scraping", date: "Abril 2024", area: "Dados e Fundamentos" },
+        { title: "UI/UX Design", date: "Maio 2024", area: "Processos e Design" },
+        { title: "Sass", date: "Maio 2024", hours: "2h", area: "Front-end" },
+        { title: "Tailwind CSS", date: "Maio 2024", area: "Front-end" },
+        { title: "Bootstrap", date: "Maio 2024", hours: "7h", area: "Front-end" },
+        { title: "JavaScript I, II, III, IV, V e VI", date: "Outubro 2024", hours: "40h", area: "Front-end" },
+        { title: "TypeScript", date: "Outubro 2024", hours: "5h", area: "Front-end" },
+      ],
+    },
+    {
+      name: "Cubos Academy",
+      courses: [{ title: "Minicurso de UX/UI Design", date: "Junho 2024", hours: "5h", area: "Processos e Design" }],
+    },
+  ],
   infraSkills: [
     { title: "Suporte a Usuários", description: "Atendimento via GLPI, resolução de chamados, instalação e configuração de softwares e aplicativos." },
     { title: "Manutenção e Hardware", description: "Correções preventivas e corretivas, atualização de antivírus, configuração de impressoras." },

@@ -91,6 +91,102 @@ func Get() Content {
 				Period:      "Junho 2024 - Trancado em maio de 2025",
 			},
 		},
+		Institutions: []Institution{
+			{
+				Name: "DIO - Digital Innovation One",
+				Tracks: []Track{
+					{
+						Name:   "Formação IA Generativa",
+						Status: "Em andamento",
+						Courses: []Course{
+							{Title: "Introdução aos Fundamentos de IA Generativa com a Universia", Date: "Outubro 2025", Hours: "1h", Area: "IA e Automação"},
+							{Title: "Aplicações e Impacto da IA no Mundo Atual", Date: "Maio 2026", Hours: "1h", Area: "IA e Automação"},
+							{Title: "Aplicações Práticas da Inteligência Artificial", Date: "Maio 2026", Hours: "2h", Area: "IA e Automação"},
+							{Title: "A Era da IA: Machine Learning, LLMs, IA Generativa e Agentes", Date: "Maio 2026", Hours: "2h", Area: "IA e Automação"},
+							{Title: "Introdução à Engenharia de Prompts", Date: "Junho 2026", Hours: "1h", Area: "IA e Automação"},
+						},
+					},
+					{
+						Name:   "Formação React",
+						Status: "Em andamento",
+						Courses: []Course{
+							{Title: "Configuração de Ambiente React", Date: "Maio 2024", Hours: "1h", Area: "Front-end"},
+							{Title: "Páginas Web com HTML", Date: "Maio 2024", Hours: "2h", Area: "Front-end"},
+							{Title: "Estilizando Páginas com CSS", Date: "Maio 2024", Hours: "1h", Area: "Front-end"},
+							{Title: "Tornando Páginas Web Interativas com JavaScript", Date: "Maio 2024", Hours: "2h", Area: "Front-end"},
+							{Title: "Entendendo a DOM (Document Object Model)", Date: "Maio 2024", Hours: "1h", Area: "Front-end"},
+							{Title: "Primeiros Passos na Biblioteca React", Date: "Maio 2024", Hours: "1h", Area: "Front-end"},
+							{Title: "Criando Uma Calculadora Com React", Date: "Maio 2024", Hours: "1h", Area: "Front-end"},
+							{Title: "Criando um Projeto React do Zero", Date: "Junho 2024", Hours: "1h", Area: "Front-end"},
+							{Title: "Convenções e Qualidade de Código React", Date: "Junho 2024", Hours: "1h", Area: "Front-end"},
+						},
+					},
+					{
+						Name:   "Formação DevOps",
+						Status: "Em andamento",
+						Courses: []Course{
+							{Title: "Onboarding - DevOps", Date: "Junho 2025", Hours: "1h", Area: "Infra e DevOps"},
+							{Title: "Entendendo O que é DevOps", Date: "Junho 2025", Hours: "1h", Area: "Infra e DevOps"},
+							{Title: "DevOps e Processos de Desenvolvimento de Software", Date: "Junho 2025", Hours: "1h", Area: "Infra e DevOps"},
+							{Title: "Introdução ao DevSecOps", Date: "Junho 2025", Hours: "1h", Area: "Infra e DevOps"},
+							{Title: "Qual é a diferença entre SRE e DevOps", Date: "Junho 2025", Hours: "1h", Area: "Infra e DevOps"},
+							{Title: "Introdução ao DevOps com CI/CD", Date: "Junho 2025", Hours: "1h", Area: "Infra e DevOps"},
+							{Title: "Criando seu Primeiro Projeto de DevOps com GitLab", Date: "Junho 2025", Hours: "1h", Area: "Infra e DevOps"},
+							{Title: "Cloud Computing e o DevOps", Date: "Julho 2025", Hours: "1h", Area: "Infra e DevOps"},
+							{Title: "Infraestrutura como Código no DevOps", Date: "Julho 2025", Hours: "1h", Area: "Infra e DevOps"},
+						},
+					},
+					{
+						Name:   "DIO Campus Expert (13ª turma)",
+						Status: "Concluída",
+						Courses: []Course{
+							{Title: "Onboarding | Boas-vindas ao DIO Campus Expert Turma 13", Date: "Agosto 2025", Hours: "1h", Area: "Processos e Design"},
+							{Title: "Como desenvolver a sua Liderança e Protagonismo como embaixador(a) da DIO!", Date: "Agosto 2025", Hours: "2h", Area: "Processos e Design"},
+							{Title: "Programa DIO Campus Expert", Date: "Agosto - Setembro 2025", Hours: "30h", Area: "Processos e Design"},
+						},
+					},
+				},
+			},
+			{
+				Name: "Conquer Business School",
+				Courses: []Course{
+					{Title: "Inteligência Artificial: eleve sua produtividade e acelere sua carreira", Date: "Junho 2024", Hours: "10h", Area: "IA e Automação"},
+				},
+			},
+			{
+				Name: "Curso em Vídeo",
+				Courses: []Course{
+					{Title: "MySQL", Date: "Fevereiro 2023", Hours: "40h", Area: "Dados e Fundamentos"},
+					{Title: "Curso HTML5 e CSS3: Módulo 1 de 5", Date: "Março 2023", Hours: "40h", Area: "Front-end"},
+					{Title: "Curso HTML5 e CSS3: Módulo 2 de 5", Date: "Abril 2023", Hours: "40h", Area: "Front-end"},
+					{Title: "Curso HTML5 e CSS3: Módulo 3 de 5", Date: "Abril 2023", Hours: "40h", Area: "Front-end"},
+					{Title: "Curso HTML5 e CSS3: Módulo 4 de 5", Date: "Maio 2023", Hours: "40h", Area: "Front-end"},
+					{Title: "JavaScript", Date: "Junho 2023", Hours: "40h", Area: "Front-end"},
+					{Title: "Segurança da Informação: Módulo 00", Date: "Setembro 2023", Hours: "20h", Area: "Infra e DevOps"},
+					{Title: "Algoritmo", Date: "Setembro 2025", Hours: "40h", Area: "Dados e Fundamentos"},
+				},
+			},
+			{
+				Name: "OneBitCode",
+				Courses: []Course{
+					{Title: "Análise de Requisitos", Date: "Abril 2024", Area: "Processos e Design"},
+					{Title: "Metodologias Ágeis - SCRUM", Date: "Abril 2024", Area: "Processos e Design"},
+					{Title: "Web Scraping", Date: "Abril 2024", Area: "Dados e Fundamentos"},
+					{Title: "UI/UX Design", Date: "Maio 2024", Area: "Processos e Design"},
+					{Title: "Sass", Date: "Maio 2024", Hours: "2h", Area: "Front-end"},
+					{Title: "Tailwind CSS", Date: "Maio 2024", Area: "Front-end"},
+					{Title: "Bootstrap", Date: "Maio 2024", Hours: "7h", Area: "Front-end"},
+					{Title: "JavaScript I, II, III, IV, V e VI", Date: "Outubro 2024", Hours: "40h", Area: "Front-end"},
+					{Title: "TypeScript", Date: "Outubro 2024", Hours: "5h", Area: "Front-end"},
+				},
+			},
+			{
+				Name: "Cubos Academy",
+				Courses: []Course{
+					{Title: "Minicurso de UX/UI Design", Date: "Junho 2024", Hours: "5h", Area: "Processos e Design"},
+				},
+			},
+		},
 		InfraSkills: []InfraSkill{
 			{Title: "Suporte a Usuários", Description: "Atendimento via GLPI, resolução de chamados, instalação e configuração de softwares e aplicativos."},
 			{Title: "Manutenção e Hardware", Description: "Correções preventivas e corretivas, atualização de antivírus, configuração de impressoras."},

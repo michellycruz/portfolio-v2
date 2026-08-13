@@ -26,7 +26,7 @@ function PortfolioApp() {
       <main>
         <Hero profile={content.profile} />
         <Experience items={content.experience} />
-        <Education items={content.education} />
+        <Education items={content.education} institutions={content.institutions} />
         <Skills
           infraSkills={content.infraSkills}
           infraHighlights={content.infraHighlights}

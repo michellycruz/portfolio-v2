@@ -62,6 +62,11 @@
   --viz-planejador: #1baf7a;
   --viz-analista: #2a78d6;
   --viz-track: #e1e0d9;
+
+  /* Formation chart: one highlighted area against neutral bars. Both clear 3:1
+     against the panel surface (coral 3.27, neutral 3.86 on white). */
+  --viz-highlight: #ed6058;
+  --viz-neutral: #7c828e;
 }
 
 html {
@@ -76,6 +81,10 @@ html.dark {
   --viz-planejador: #199e70;
   --viz-analista: #3987e5;
   --viz-track: #2c2c2a;
+
+  /* coral 4.75, neutral 4.91 against #20242c */
+  --viz-highlight: #ed6058;
+  --viz-neutral: #8b919d;
 }
 
 body {

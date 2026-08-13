@@ -35,6 +35,25 @@ export interface Education {
   period: string;
 }
 
+export interface Course {
+  title: string;
+  date: string;
+  hours?: string;
+  area: string;
+}
+
+export interface Track {
+  name: string;
+  status: string;
+  courses: Course[];
+}
+
+export interface Institution {
+  name: string;
+  tracks?: Track[];
+  courses?: Course[];
+}
+
 export interface InfraSkill {
   title: string;
   description: string;
@@ -56,6 +75,7 @@ export interface Content {
   profile: Profile;
   experience: Experience[];
   education: Education[];
+  institutions: Institution[];
   infraSkills: InfraSkill[];
   infraHighlights: string[];
   skillCategories: SkillCategory[];

@@ -19,8 +19,9 @@ go run .
 
 Roda por padrão em `http://localhost:8080`. Endpoints:
 
-- `GET /api/content` — todo o conteúdo do portfólio (perfil, experiência, formação, skills, projetos)
+- `GET /api/content` — todo o conteúdo do portfólio (perfil, experiência, formação, cursos, skills, projetos)
 - `GET /api/profile`, `/api/experience`, `/api/education`, `/api/skills`, `/api/projects` — seções individuais
+  (`/api/education` devolve `{ education, institutions }` e `/api/skills` devolve `{ infraSkills, infraHighlights, categories }`)
 - `POST /api/contact` — recebe `{ name, email, message }`, valida e envia por e-mail (ou loga no console se SMTP não estiver configurado)
 - `GET /healthz` — health check
 

@@ -43,6 +43,34 @@ type Education struct {
 	Period      string `json:"period"`
 }
 
+// Course is a single completed course, backed by a certificate. Area is the
+// competency group it counts towards in the formation chart — tagged per course
+// because institutions mix areas, so the chart stays correct when courses are
+// added without touching any aggregate.
+type Course struct {
+	Title string `json:"title"`
+	Date  string `json:"date"`
+	Hours string `json:"hours,omitempty"`
+	Area  string `json:"area"`
+}
+
+// Track is a multi-course program (a DIO "formação"). Status says whether the
+// track itself is finished — its Courses are the ones already certified, so a
+// track can be in progress while holding completed courses.
+type Track struct {
+	Name    string   `json:"name"`
+	Status  string   `json:"status"`
+	Courses []Course `json:"courses"`
+}
+
+// Institution groups everything studied at one place. Tracks is for schools
+// that bundle courses into programs; Courses holds standalone ones.
+type Institution struct {
+	Name    string   `json:"name"`
+	Tracks  []Track  `json:"tracks,omitempty"`
+	Courses []Course `json:"courses,omitempty"`
+}
+
 // InfraSkill is a highlighted support/infrastructure competency card.
 type InfraSkill struct {
 	Title       string `json:"title"`
@@ -68,6 +96,7 @@ type Content struct {
 	Profile        Profile         `json:"profile"`
 	Experience     []Experience    `json:"experience"`
 	Education      []Education     `json:"education"`
+	Institutions   []Institution   `json:"institutions"`
 	InfraSkills    []InfraSkill    `json:"infraSkills"`
 	InfraHighlights []string       `json:"infraHighlights"`
 	SkillCategories []SkillCategory `json:"skillCategories"`

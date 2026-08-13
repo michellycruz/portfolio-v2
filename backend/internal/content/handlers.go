@@ -26,9 +26,13 @@ func HandleExperience(w http.ResponseWriter, r *http.Request) {
 	writeJSON(w, http.StatusOK, Get().Experience)
 }
 
-// HandleEducation serves the education timeline.
+// HandleEducation serves the academic timeline + courses/certifications together.
 func HandleEducation(w http.ResponseWriter, r *http.Request) {
-	writeJSON(w, http.StatusOK, Get().Education)
+	c := Get()
+	writeJSON(w, http.StatusOK, map[string]any{
+		"education":    c.Education,
+		"institutions": c.Institutions,
+	})
 }
 
 // HandleSkills serves infra skills + tech skill categories together.

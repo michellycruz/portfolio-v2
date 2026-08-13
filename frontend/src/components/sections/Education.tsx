@@ -1,9 +1,11 @@
 import { motion } from "framer-motion";
-import type { Education as EducationItem } from "../../types/content";
+import type { Education as EducationItem, Institution } from "../../types/content";
+import { FormationChart } from "../ui/FormationChart";
+import { InstitutionAccordion } from "../ui/InstitutionAccordion";
 import { Panel, PanelBody, PanelTitle } from "../ui/Panel";
 import { SectionHeading } from "../ui/SectionHeading";
 
-export function Education({ items }: { items: EducationItem[] }) {
+export function Education({ items, institutions }: { items: EducationItem[]; institutions: Institution[] }) {
   return (
     <section id="formacao" className="mx-auto max-w-6xl px-5 py-16">
       <SectionHeading>Formação acadêmica</SectionHeading>
@@ -42,6 +44,24 @@ export function Education({ items }: { items: EducationItem[] }) {
           </PanelBody>
         </Panel>
       </div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-60px" }}
+        transition={{ duration: 0.5 }}
+        className="mt-8"
+      >
+        <Panel noShadowOnHover>
+          <PanelTitle accent="mint">Cursos e certificações</PanelTitle>
+          <PanelBody>
+            <InstitutionAccordion institutions={institutions} />
+            <div className="mt-5 border-t-2 border-dashed border-ink/15 pt-4 dark:border-white/15">
+              <FormationChart institutions={institutions} />
+            </div>
+          </PanelBody>
+        </Panel>
+      </motion.div>
     </section>
   );
 }
