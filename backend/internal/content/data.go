@@ -104,6 +104,7 @@ func Get() Content {
 			{Title: "Prototipação", Skills: []string{"figma", "balsamiq"}},
 			{Title: "Ferramentas", Skills: []string{"sql", "gitlab", "git", "github-icon", "excel", "teams", "word", "outlook", "notion"}},
 			{Title: "Linguagens e Frameworks", Skills: []string{"html", "css", "js", "bootstrap", "sass", "react", "tailwind"}},
+			{Title: "Inteligência Artificial", Skills: []string{"ia"}},
 		},
 		Projects: []Project{
 			{

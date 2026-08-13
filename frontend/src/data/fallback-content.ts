@@ -105,6 +105,7 @@ export const fallbackContent: Content = {
     { title: "Prototipação", skills: ["figma", "balsamiq"] },
     { title: "Ferramentas", skills: ["sql", "gitlab", "git", "github-icon", "excel", "teams", "word", "outlook", "notion"] },
     { title: "Linguagens e Frameworks", skills: ["html", "css", "js", "bootstrap", "sass", "react", "tailwind"] },
+    { title: "Inteligência Artificial", skills: ["ia"] },
   ],
   projects: [
     { title: "Página de Emails", tech: ["react", "tailwind"], imageUrl: "/images/projects/pagina_de_emails.png", linkUrl: "https://paginadeemail.vercel.app/" },

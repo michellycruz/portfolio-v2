@@ -22,6 +22,7 @@ const techIcons: Record<string, IconMeta> = {
   sass: { src: "/images/tech/sass.png", label: "Sass" },
   react: { src: "/images/tech/react.png", label: "React" },
   tailwind: { src: "/images/tech/tailwind.png", label: "Tailwind" },
+  ia: { src: "/images/tech/ia.svg", label: "Inteligência Artificial" },
 };
 
 const socialIcons: Record<string, IconMeta> = {

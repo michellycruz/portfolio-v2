@@ -62,7 +62,7 @@ export function Skills({ infraSkills, infraHighlights, categories }: SkillsProps
         Tecnologias
       </h3>
 
-      <div className="grid gap-6 md:grid-cols-3">
+      <div className="grid gap-6 sm:grid-cols-2">
         {categories.map((cat, i) => (
           <motion.div
             key={cat.title}
