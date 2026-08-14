@@ -8,7 +8,7 @@ export const fallbackContent: Content = {
     role: "Analista de Sistemas",
     location: "Espírito Santo, Brasil",
     summary: [
-      "Analista de Sistemas na Hostbraza, onde transito entre desenvolvimento, infraestrutura e atendimento: crio plugins e aplicações para WordPress em PHP, desenvolvo aplicações e automações em PHP, Go e React com apoio de IA, administro servidores VPS em ambiente Linux e atendo clientes de hospedagem.",
+      "Analista de Sistemas na Hostbraza, onde transito entre desenvolvimento e atendimento: crio plugins e aplicações para WordPress em PHP, desenvolvo aplicações e automações em PHP, Go e React com apoio de IA e atendo clientes de hospedagem.",
       "Venho do suporte técnico e da análise de sistemas, com vivência em atendimento via GLPI, consultas SQL, levantamento de requisitos, documentação técnica e protótipos em Figma e Balsamiq. Dessa origem trago o hábito de documentar, testar e traduzir necessidade de negócio em solução técnica.",
     ],
     profileBadge: "Planejador Analista (PA)",
@@ -35,7 +35,6 @@ export const fallbackContent: Content = {
       bullets: [
         "Desenvolvimento de plugins e aplicações para WordPress utilizando PHP, com apoio de IA para acelerar implementação, refatoração e testes.",
         "Criação de aplicações e automações em PHP, Go e React, utilizando o Claude Code como assistente de desenvolvimento.",
-        "Administração e gerenciamento de servidores VPS, incluindo configuração, manutenção, monitoramento e otimização de ambientes Linux.",
         "Atendimento N1 aos clientes de hospedagem.",
         "Desenvolvimento orientado por IA (AI-Assisted Development), utilizando engenharia de prompts para geração de código, documentação e otimização de processos.",
         "Correção de bugs, implementação de novas funcionalidades e manutenção de aplicações web.",
@@ -80,11 +79,7 @@ export const fallbackContent: Content = {
       course: "Pós-graduação em Engenharia de Software",
       institution: "Descomplica - Centro Universitário União das Américas",
       period: "Agosto 2023 - Agosto 2024",
-    },
-    {
-      course: "Pós-graduação em Desenvolvimento Fullstack",
-      institution: "Descomplica - Centro Universitário União das Américas",
-      period: "Novembro 2024 - Novembro 2025",
+      hours: "540h",
     },
     {
       course: "Bacharelado em Ciência da Computação",
@@ -93,6 +88,31 @@ export const fallbackContent: Content = {
     },
   ],
   institutions: [
+    {
+      name: "Descomplica - UniAmérica",
+      tracks: [
+        {
+          // Disciplinas e cargas horárias conforme o histórico escolar do
+          // certificado de conclusão, que soma exatamente as 540h do curso.
+          name: "Pós-graduação em Engenharia de Software",
+          status: "Concluída",
+          courses: [
+            { title: "Programação Extrema", date: "Janeiro 2024", hours: "60h", area: "Processos e Design" },
+            { title: "Essencial DataBase", date: "Fevereiro 2024", hours: "30h", area: "Dados e Fundamentos" },
+            { title: "Lógica de Programação com Java", date: "Fevereiro 2024", hours: "30h", area: "Dados e Fundamentos" },
+            { title: "Interface de Software", date: "Fevereiro 2024", hours: "60h", area: "Processos e Design" },
+            { title: "Gerenciamento Avançado de Projetos", date: "Fevereiro 2024", hours: "60h", area: "Processos e Design" },
+            { title: "Metodologias de Desenvolvimento de Software", date: "Fevereiro 2024", hours: "30h", area: "Processos e Design" },
+            { title: "Estrutura de Dados para Sistemas Inteligentes", date: "Março 2024", hours: "60h", area: "Dados e Fundamentos" },
+            { title: "Arquitetura de BI e Big Data", date: "Abril 2024", hours: "60h", area: "Dados e Fundamentos" },
+            { title: "Plataformas para Desenvolvimento na Nuvem", date: "Maio 2024", hours: "60h", area: "Infra e DevOps" },
+            { title: "Arquitetura e Modelagem de Dados", date: "Junho 2024", hours: "30h", area: "Dados e Fundamentos" },
+            { title: "Análise de Dados e BI para Tomada de Decisão", date: "Julho 2024", hours: "30h", area: "Dados e Fundamentos" },
+            { title: "Cloud Diversity AWS", hours: "30h", area: "Infra e DevOps" },
+          ],
+        },
+      ],
+    },
     {
       name: "DIO - Digital Innovation One",
       tracks: [

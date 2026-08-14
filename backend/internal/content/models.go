@@ -36,11 +36,13 @@ type Experience struct {
 	Results string   `json:"results,omitempty"`
 }
 
-// Education describes one academic entry.
+// Education describes one academic entry. Hours is the total workload stated on
+// the completion certificate, so it is only set for finished courses.
 type Education struct {
 	Course      string `json:"course"`
 	Institution string `json:"institution"`
 	Period      string `json:"period"`
+	Hours       string `json:"hours,omitempty"`
 }
 
 // Course is a single completed course, backed by a certificate. Area is the
@@ -49,7 +51,7 @@ type Education struct {
 // added without touching any aggregate.
 type Course struct {
 	Title string `json:"title"`
-	Date  string `json:"date"`
+	Date  string `json:"date,omitempty"`
 	Hours string `json:"hours,omitempty"`
 	Area  string `json:"area"`
 }

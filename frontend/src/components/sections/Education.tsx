@@ -5,6 +5,7 @@ import { InstitutionAccordion } from "../ui/InstitutionAccordion";
 import { Panel, PanelBody, PanelTitle } from "../ui/Panel";
 import { RobotScholar } from "../ui/RobotScholar";
 import { SectionHeading } from "../ui/SectionHeading";
+import { StudySummary } from "../ui/StudySummary";
 
 export function Education({ items, institutions }: { items: EducationItem[]; institutions: Institution[] }) {
   return (
@@ -37,7 +38,9 @@ export function Education({ items, institutions }: { items: EducationItem[]; ins
               >
                 <h3 className="font-[var(--font-mono-brand)] text-lg text-ink dark:text-white">{edu.course}</h3>
                 <p className="mt-1 text-ink-soft dark:text-white/80">{edu.institution}</p>
-                <p className="mt-1 text-sm opacity-50">{edu.period}</p>
+                <p className="mt-1 text-sm opacity-50">
+                  {edu.hours ? `${edu.period} · ${edu.hours}` : edu.period}
+                </p>
               </motion.div>
             ))}
           </div>
@@ -55,6 +58,7 @@ export function Education({ items, institutions }: { items: EducationItem[]; ins
         <Panel noShadowOnHover>
           <PanelTitle accent="mint">Cursos e certificações</PanelTitle>
           <PanelBody>
+            <StudySummary institutions={institutions} />
             <InstitutionAccordion institutions={institutions} />
             <div className="mt-5 border-t-2 border-dashed border-ink/15 pt-4 dark:border-white/15">
               <FormationChart institutions={institutions} />

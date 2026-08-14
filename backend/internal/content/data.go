@@ -10,7 +10,7 @@ func Get() Content {
 			Role:     "Analista de Sistemas",
 			Location: "Espírito Santo, Brasil",
 			Summary: []string{
-				"Analista de Sistemas na Hostbraza, onde transito entre desenvolvimento, infraestrutura e atendimento: crio plugins e aplicações para WordPress em PHP, desenvolvo aplicações e automações em PHP, Go e React com apoio de IA, administro servidores VPS em ambiente Linux e atendo clientes de hospedagem.",
+				"Analista de Sistemas na Hostbraza, onde transito entre desenvolvimento e atendimento: crio plugins e aplicações para WordPress em PHP, desenvolvo aplicações e automações em PHP, Go e React com apoio de IA e atendo clientes de hospedagem.",
 				"Venho do suporte técnico e da análise de sistemas, com vivência em atendimento via GLPI, consultas SQL, levantamento de requisitos, documentação técnica e protótipos em Figma e Balsamiq. Dessa origem trago o hábito de documentar, testar e traduzir necessidade de negócio em solução técnica.",
 			},
 			ProfileBadge: "Planejador Analista (PA)",
@@ -37,7 +37,6 @@ func Get() Content {
 				Bullets: []string{
 					"Desenvolvimento de plugins e aplicações para WordPress utilizando PHP, com apoio de IA para acelerar implementação, refatoração e testes.",
 					"Criação de aplicações e automações em PHP, Go e React, utilizando o Claude Code como assistente de desenvolvimento.",
-					"Administração e gerenciamento de servidores VPS, incluindo configuração, manutenção, monitoramento e otimização de ambientes Linux.",
 					"Atendimento N1 aos clientes de hospedagem.",
 					"Desenvolvimento orientado por IA (AI-Assisted Development), utilizando engenharia de prompts para geração de código, documentação e otimização de processos.",
 					"Correção de bugs, implementação de novas funcionalidades e manutenção de aplicações web.",
@@ -79,11 +78,7 @@ func Get() Content {
 				Course:      "Pós-graduação em Engenharia de Software",
 				Institution: "Descomplica - Centro Universitário União das Américas",
 				Period:      "Agosto 2023 - Agosto 2024",
-			},
-			{
-				Course:      "Pós-graduação em Desenvolvimento Fullstack",
-				Institution: "Descomplica - Centro Universitário União das Américas",
-				Period:      "Novembro 2024 - Novembro 2025",
+				Hours:       "540h",
 			},
 			{
 				Course:      "Bacharelado em Ciência da Computação",
@@ -92,6 +87,31 @@ func Get() Content {
 			},
 		},
 		Institutions: []Institution{
+			{
+				Name: "Descomplica - UniAmérica",
+				Tracks: []Track{
+					{
+						// Disciplinas e cargas horárias conforme o histórico escolar do
+						// certificado de conclusão, que soma exatamente as 540h do curso.
+						Name:   "Pós-graduação em Engenharia de Software",
+						Status: "Concluída",
+						Courses: []Course{
+							{Title: "Programação Extrema", Date: "Janeiro 2024", Hours: "60h", Area: "Processos e Design"},
+							{Title: "Essencial DataBase", Date: "Fevereiro 2024", Hours: "30h", Area: "Dados e Fundamentos"},
+							{Title: "Lógica de Programação com Java", Date: "Fevereiro 2024", Hours: "30h", Area: "Dados e Fundamentos"},
+							{Title: "Interface de Software", Date: "Fevereiro 2024", Hours: "60h", Area: "Processos e Design"},
+							{Title: "Gerenciamento Avançado de Projetos", Date: "Fevereiro 2024", Hours: "60h", Area: "Processos e Design"},
+							{Title: "Metodologias de Desenvolvimento de Software", Date: "Fevereiro 2024", Hours: "30h", Area: "Processos e Design"},
+							{Title: "Estrutura de Dados para Sistemas Inteligentes", Date: "Março 2024", Hours: "60h", Area: "Dados e Fundamentos"},
+							{Title: "Arquitetura de BI e Big Data", Date: "Abril 2024", Hours: "60h", Area: "Dados e Fundamentos"},
+							{Title: "Plataformas para Desenvolvimento na Nuvem", Date: "Maio 2024", Hours: "60h", Area: "Infra e DevOps"},
+							{Title: "Arquitetura e Modelagem de Dados", Date: "Junho 2024", Hours: "30h", Area: "Dados e Fundamentos"},
+							{Title: "Análise de Dados e BI para Tomada de Decisão", Date: "Julho 2024", Hours: "30h", Area: "Dados e Fundamentos"},
+							{Title: "Cloud Diversity AWS", Hours: "30h", Area: "Infra e DevOps"},
+						},
+					},
+				},
+			},
 			{
 				Name: "DIO - Digital Innovation One",
 				Tracks: []Track{

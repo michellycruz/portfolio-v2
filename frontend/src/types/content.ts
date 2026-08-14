@@ -33,11 +33,12 @@ export interface Education {
   course: string;
   institution: string;
   period: string;
+  hours?: string;
 }
 
 export interface Course {
   title: string;
-  date: string;
+  date?: string;
   hours?: string;
   area: string;
 }

@@ -18,7 +18,7 @@ function CourseRow({ course }: { course: Course }) {
         <span className="text-ink-soft dark:text-white/80">{course.title}</span>
       </span>
       <span className="ml-3 block shrink-0 text-xs whitespace-nowrap opacity-50 sm:ml-auto sm:pl-3">
-        {course.hours ? `${course.date} · ${course.hours}` : course.date}
+        {[course.date, course.hours].filter(Boolean).join(" · ")}
       </span>
     </li>
   );
