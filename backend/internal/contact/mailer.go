@@ -34,9 +34,30 @@ func LoadConfig() Config {
 	}
 }
 
+// Missing lists the variables needed to send mail that have no value. It names
+// the variables only — never their contents — so a startup failure can say
+// exactly what to fix without printing a credential to the log.
+func (c Config) Missing() []string {
+	required := []struct{ name, value string }{
+		{"SMTP_HOST", c.Host},
+		{"SMTP_PORT", c.Port},
+		{"SMTP_USER", c.User},
+		{"SMTP_PASS", c.Pass},
+		{"CONTACT_TO_EMAIL", c.To},
+	}
+
+	var missing []string
+	for _, v := range required {
+		if v.value == "" {
+			missing = append(missing, v.name)
+		}
+	}
+	return missing
+}
+
 // Configured reports whether enough settings are present to actually send mail.
 func (c Config) Configured() bool {
-	return c.Host != "" && c.Port != "" && c.User != "" && c.Pass != "" && c.To != ""
+	return len(c.Missing()) == 0
 }
 
 // Send delivers the contact message. When SMTP is not configured it logs the

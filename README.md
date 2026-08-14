@@ -34,8 +34,12 @@ Configuração via variáveis de ambiente (copie `backend/.env.example` para `ba
 | `STATIC_DIR` | Caminho do build do frontend (`frontend/dist`) para servir tudo por um único binário |
 | `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS` | Credenciais SMTP para o formulário de contato |
 | `CONTACT_FROM_EMAIL`, `CONTACT_TO_EMAIL` | Remetente e destinatário das mensagens de contato |
+| `APP_ENV` | `production` marca o ambiente como deploy (ver abaixo) |
+| `ALLOW_UNCONFIGURED_SMTP` | `true` permite subir um deploy sem SMTP, aceitando o modo só-log |
 
-Sem SMTP configurado, o formulário continua funcionando normalmente — a mensagem é registrada no log do servidor em vez de enviada por e-mail. Isso é o suficiente para desenvolvimento local.
+**Em desenvolvimento**, sem SMTP configurado o formulário continua funcionando — a mensagem é registrada no log do servidor em vez de enviada por e-mail, com um aviso no boot. Isso é o suficiente para desenvolvimento local.
+
+**Em deploy**, o servidor **se recusa a subir** se qualquer variável de SMTP estiver em branco, dizendo no log qual delas falta. O motivo: o envio por log devolve sucesso para o frontend, então um deploy sem credencial mostra "mensagem enviada" para o visitante enquanto a mensagem só chega ao log — uma falha silenciosa que pode passar semanas sem ser notada. É considerado deploy quando `STATIC_DIR` está preenchido ou `APP_ENV=production`; para subir assim mesmo, use `ALLOW_UNCONFIGURED_SMTP=true`.
 
 ## Frontend (React)
 
