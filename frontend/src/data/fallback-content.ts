@@ -239,7 +239,7 @@ export const fallbackContent: Content = {
   ],
   projects: [
     { title: "Página de Emails", tech: ["react", "tailwind"], imageUrl: "/images/projects/pagina_de_emails.png", linkUrl: "https://paginadeemail.vercel.app/" },
-    { title: "Jogo da Memória", tech: ["html", "css", "js"], imageUrl: "/images/projects/jogo_da_memoria.png", linkUrl: "https://michellycruz.github.io/jogos-e-projetos/jogo_da_memoria/pages/game.html" },
+    { title: "Jogo da Memória", tech: ["html", "css", "js"], imageUrl: "/images/projects/jogo_da_memoria.png", linkUrl: "https://michellycruz.github.io/jogos-e-projetos/jogo_da_memoria/index.html" },
     { title: "Electrum", tech: ["html", "sass"], imageUrl: "/images/projects/electrum.png", linkUrl: "https://electrum-sass.vercel.app/" },
     { title: "Calculadora", tech: ["html", "css", "js"], imageUrl: "/images/projects/calculadora.png", linkUrl: "https://michellycruz.github.io/javascript-onebitcode/projetos/calculadora/index.html" },
     { title: "PetLife", tech: ["html", "css", "js"], imageUrl: "/images/projects/petlife.png", linkUrl: "https://michellycruz.github.io/jogos-e-projetos/petlife/index.html" },

@@ -239,7 +239,7 @@ func Get() Content {
 				Title:    "Jogo da Memória",
 				Tech:     []string{"html", "css", "js"},
 				ImageURL: "/images/projects/jogo_da_memoria.png",
-				LinkURL:  "https://michellycruz.github.io/jogos-e-projetos/jogo_da_memoria/pages/game.html",
+				LinkURL:  "https://michellycruz.github.io/jogos-e-projetos/jogo_da_memoria/index.html",
 			},
 			{
 				Title:    "Electrum",
