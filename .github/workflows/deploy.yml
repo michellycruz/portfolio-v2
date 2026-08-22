@@ -1,48 +1,30 @@
 name: Deploy
 
-# Build a cada push no master. O deploy em si só roda se os secrets da VPS
-# estiverem configurados (veja .github/DEPLOY.md), então dá para commitar este
-# arquivo antes de configurar nada: o build roda como CI e o deploy é pulado.
+# Builda a cada push no master e publica o resultado na release "deploy-latest".
+# Quem instala e a propria VPS: um timer systemd consulta essa release e se
+# atualiza quando o commit muda (veja .github/DEPLOY.md).
+#
+# O caminho inverso - o runner entrar por SSH na VPS - nao funciona aqui: o
+# firewall da VPS so libera IPs conhecidos e recusa os do GitHub Actions.
+# Liberar as faixas do Actions significaria abrir o SSH para boa parte da
+# Azure, entao a VPS puxa em vez de receber.
 on:
   push:
     branches: [master]
   workflow_dispatch:
 
-# Dois deploys simultâneos trocariam o binário um por cima do outro.
 concurrency:
   group: deploy-production
   cancel-in-progress: false
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write   # necessario para criar/atualizar a release
 
     steps:
       - uses: actions/checkout@v4
-
-      - name: Verificar se o deploy está configurado
-        id: cfg
-        env:
-          HOST: ${{ secrets.VPS_HOST }}
-          USER_: ${{ secrets.VPS_USER }}
-          KEY: ${{ secrets.VPS_SSH_KEY }}
-          DEPLOY_PATH: ${{ vars.DEPLOY_PATH }}
-          SERVICE_NAME: ${{ vars.SERVICE_NAME }}
-        run: |
-          missing=""
-          [ -n "$HOST" ]         || missing="$missing VPS_HOST"
-          [ -n "$USER_" ]        || missing="$missing VPS_USER"
-          [ -n "$KEY" ]          || missing="$missing VPS_SSH_KEY"
-          [ -n "$DEPLOY_PATH" ]  || missing="$missing DEPLOY_PATH"
-          [ -n "$SERVICE_NAME" ] || missing="$missing SERVICE_NAME"
-          if [ -n "$missing" ]; then
-            echo "ready=false" >> "$GITHUB_OUTPUT"
-            echo "::warning::Deploy pulado - faltam:$missing. Veja .github/DEPLOY.md"
-          else
-            echo "ready=true" >> "$GITHUB_OUTPUT"
-          fi
-
-      # ---------- build (sempre roda, serve de CI) ----------
 
       - uses: actions/setup-node@v4
         with:
@@ -53,10 +35,10 @@ jobs:
       - name: Build do frontend
         working-directory: frontend
         env:
-          # Vazio de propósito: em produção o binário Go serve a SPA e a API na
-          # mesma origem, então as chamadas viram /api/... relativas. Se ficar
+          # Vazio de proposito: em producao o binario Go serve a SPA e a API na
+          # mesma origem, entao as chamadas viram /api/... relativas. Se ficar
           # indefinida, lib/api.ts cai no default http://localhost:8080 e o
-          # site publicado tenta falar com a máquina do visitante.
+          # site publicado tenta falar com a maquina do visitante.
           VITE_API_URL: ''
         run: |
           npm ci
@@ -65,7 +47,7 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version-file: backend/go.mod
-          cache: false   # o projeto não tem dependências externas, não há go.sum
+          cache: false   # o projeto nao tem dependencias externas, nao ha go.sum
 
       - name: Build do backend
         working-directory: backend
@@ -75,108 +57,30 @@ jobs:
           GOARCH: ${{ vars.VPS_ARCH || 'amd64' }}
         run: go build -trimpath -ldflags="-s -w" -o portfolio .
 
-      # ---------- deploy ----------
-
-      - name: Configurar SSH
-        if: steps.cfg.outputs.ready == 'true'
-        env:
-          KEY: ${{ secrets.VPS_SSH_KEY }}
-          HOST: ${{ secrets.VPS_HOST }}
-          USER_: ${{ secrets.VPS_USER }}
-          PORT: ${{ vars.VPS_PORT || '22' }}
+      - name: Empacotar
         run: |
-          mkdir -p ~/.ssh && chmod 700 ~/.ssh
-          printf '%s\n' "$KEY" > ~/.ssh/id_deploy
-          chmod 600 ~/.ssh/id_deploy
+          mkdir -p pkg
+          cp backend/portfolio pkg/portfolio
+          cp -r frontend/dist pkg/dist
+          echo "$GITHUB_SHA" > pkg/COMMIT
+          tar -czf portfolio-build.tar.gz -C pkg .
+          ls -la portfolio-build.tar.gz
 
-          cat >> ~/.ssh/config <<EOF
-          Host vps
-            HostName $HOST
-            User $USER_
-            Port $PORT
-            IdentityFile ~/.ssh/id_deploy
-            IdentitiesOnly yes
-            StrictHostKeyChecking accept-new
-            ConnectTimeout 20
-          EOF
-          chmod 600 ~/.ssh/config
-
-          # A chave tem que ter chegado inteira. Um secret colado sem a linha
-          # BEGIN/END, ou com as quebras de linha perdidas, falha aqui e não
-          # numa mensagem genérica de "permission denied" lá na frente.
-          ssh-keygen -y -f ~/.ssh/id_deploy > /dev/null \
-            || { echo "::error::VPS_SSH_KEY não é uma chave privada válida (cole o arquivo inteiro, com as linhas BEGIN e END)."; exit 1; }
-          echo "chave privada OK"
-
-          # A porta responde a partir DESTE runner? O IP do runner é do GitHub,
-          # não o seu - firewall que só libera IPs conhecidos barra aqui.
-          if timeout 20 bash -c "cat < /dev/null > /dev/tcp/$HOST/$PORT" 2>/dev/null; then
-            echo "porta $PORT alcançável a partir do runner"
+      - name: Publicar na release deploy-latest
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # O corpo da release guarda o SHA. A VPS compara com o que ja instalou
+          # para decidir se ha algo novo -- e o SHA so aparece aqui depois que o
+          # build passou, entao ela nunca baixa um pacote de um commit que
+          # ainda estava compilando.
+          if gh release view deploy-latest >/dev/null 2>&1; then
+            gh release upload deploy-latest portfolio-build.tar.gz --clobber
+            gh release edit deploy-latest \
+              --title "build ${GITHUB_SHA:0:7}" --notes "$GITHUB_SHA"
           else
-            echo "::error::A porta $PORT da VPS não responde a partir do runner do GitHub. O firewall da VPS provavelmente só libera IPs conhecidos - é preciso liberar as faixas de IP do GitHub Actions."
-            exit 1
+            gh release create deploy-latest portfolio-build.tar.gz \
+              --target master \
+              --title "build ${GITHUB_SHA:0:7}" --notes "$GITHUB_SHA"
           fi
-
-          # Não fatal: StrictHostKeyChecking=accept-new já cobre o primeiro acesso.
-          ssh-keyscan -T 20 -p "$PORT" "$HOST" >> ~/.ssh/known_hosts 2>/dev/null \
-            || echo "::warning::ssh-keyscan não respondeu; seguindo com accept-new"
-
-          # Prova de que a autenticação funciona, com erro legível.
-          ssh -o BatchMode=yes vps 'echo "autenticado na VPS como $(whoami)"' \
-            || { echo "::error::Conectou na porta mas a autenticação falhou. Confira se a chave pública correspondente está no ~/.ssh/authorized_keys do usuário na VPS."; exit 1; }
-
-      - name: Enviar build para a VPS
-        if: steps.cfg.outputs.ready == 'true'
-        env:
-          DEPLOY_PATH: ${{ vars.DEPLOY_PATH }}
-        run: |
-          ssh vps "mkdir -p '$DEPLOY_PATH/dist'"
-          # --delete só na pasta dist, que é 100% gerada. Nunca na raiz do app:
-          # é lá que mora o .env com as credenciais SMTP, fora do git. Sem ele o
-          # backend se recusa a subir (checkMailConfig) e o site cai.
-          rsync -az --delete frontend/dist/ "vps:$DEPLOY_PATH/dist/"
-          rsync -az backend/portfolio "vps:$DEPLOY_PATH/portfolio.new"
-
-      - name: Trocar o binário e reiniciar
-        if: steps.cfg.outputs.ready == 'true'
-        env:
-          DEPLOY_PATH: ${{ vars.DEPLOY_PATH }}
-          SERVICE_NAME: ${{ vars.SERVICE_NAME }}
-        run: |
-          ssh vps "DEPLOY_PATH='$DEPLOY_PATH' SERVICE_NAME='$SERVICE_NAME' bash -se" <<'REMOTE'
-          set -euo pipefail
-          cd "$DEPLOY_PATH"
-          # Guarda o binário atual para rollback manual rápido.
-          [ -f portfolio ] && cp -f portfolio portfolio.prev || true
-          # Para antes de trocar: substituir um executável em uso dá ETXTBSY.
-          sudo systemctl stop "$SERVICE_NAME"
-          mv -f portfolio.new portfolio
-          chmod +x portfolio
-          sudo systemctl start "$SERVICE_NAME"
-          sleep 2
-          sudo systemctl is-active --quiet "$SERVICE_NAME" \
-            || { echo "servico nao subiu:"; sudo journalctl -u "$SERVICE_NAME" -n 30 --no-pager; exit 1; }
-          REMOTE
-
-      - name: Conferir que o site atualizou
-        if: steps.cfg.outputs.ready == 'true'
-        env:
-          SITE_URL: ${{ vars.SITE_URL || 'https://michellycruz.com.br' }}
-        run: |
-          # Espera o serviço responder.
-          for i in $(seq 1 20); do
-            curl -fsS --max-time 5 "$SITE_URL/healthz" >/dev/null && break
-            [ "$i" = 20 ] && { echo "healthz nao respondeu"; exit 1; }
-            sleep 3
-          done
-
-          # Prova de que o bundle novo está no ar: o hash do asset servido tem
-          # que bater com o que acabamos de buildar. É o que faltou detectar no
-          # deploy antigo, em que o site ficou servindo uma build de dias atrás.
-          esperado=$(grep -o 'assets/index-[^"]*\.js' frontend/dist/index.html | head -1)
-          publicado=$(curl -fsS --max-time 10 "$SITE_URL/" | grep -o 'assets/index-[^"]*\.js' | head -1)
-          echo "esperado:  $esperado"
-          echo "publicado: $publicado"
-          [ -n "$esperado" ] && [ "$esperado" = "$publicado" ] \
-            || { echo "::error::O site ainda serve uma build antiga."; exit 1; }
-          echo "Deploy confirmado."
+          echo "publicado: $GITHUB_SHA"
