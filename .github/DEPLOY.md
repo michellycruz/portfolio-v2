@@ -1,133 +1,100 @@
-# Deploy automático na VPS
+# Deploy automático
 
-O workflow [`deploy.yml`](workflows/deploy.yml) builda e publica a cada push no `master`.
+A cada push no `master`, o [workflow](workflows/deploy.yml) builda e publica o
+resultado na release **`deploy-latest`**. Um timer na VPS consulta essa release
+a cada 5 minutos e se atualiza quando o commit muda.
 
-O build (frontend + backend) **sempre** roda, servindo de CI. As etapas de deploy
-só rodam depois que os secrets abaixo existirem — antes disso elas são puladas
-com um aviso, sem falhar o workflow.
+```
+push no master
+      │
+      ▼
+GitHub Actions ── builda frontend + backend ──▶ release "deploy-latest"
+                                                  (portfolio-build.tar.gz)
+                                                        │
+                                        a VPS consulta a cada 5 min
+                                                        │
+                                                        ▼
+                                          troca binário + dist, reinicia
+```
 
-## Como funciona
+## Por que a VPS puxa em vez de receber
 
-O build acontece no runner do GitHub (Ubuntu), não na VPS — então a VPS não
-precisa ter Node nem Go instalados. O que sobe por `rsync` é só o resultado:
+A primeira versão entrava por SSH a partir do runner. Não funciona aqui: o
+firewall da VPS só libera IPs conhecidos, e a porta 22 não responde em 20
+segundos a partir do GitHub, embora responda do IP de casa. Liberar as faixas
+do Actions significaria abrir o SSH para boa parte da Azure — desproporcional
+para um deploy.
 
-| Origem (runner) | Destino (VPS) |
+Invertendo o sentido: **nenhuma porta é aberta, nenhuma chave fica no GitHub**,
+e o processo roda local com o dono correto dos arquivos.
+
+## Como a VPS decide que há algo novo
+
+O corpo da release guarda o SHA do commit. A VPS compara com
+`/var/lib/portfolio-autodeploy/deployed-sha` e só age se forem diferentes.
+
+O SHA só entra na release **depois** que o build passou, então a VPS nunca
+baixa um pacote de um commit que ainda estava compilando.
+
+## O que está instalado na VPS
+
+| Caminho | Papel |
 | --- | --- |
-| `frontend/dist/` | `$DEPLOY_PATH/dist/` |
-| `backend/portfolio` (binário Linux) | `$DEPLOY_PATH/portfolio` |
+| `/usr/local/bin/portfolio-autodeploy` | script que consulta, baixa e instala |
+| `/etc/systemd/system/portfolio-autodeploy.service` | unit `oneshot` |
+| `/etc/systemd/system/portfolio-autodeploy.timer` | dispara a cada 5 min |
+| `/var/lib/portfolio-autodeploy/deployed-sha` | SHA já instalado |
+| `/opt/portfolio` | app: `portfolio`, `dist/`, `.env` |
 
-Depois o serviço é reiniciado e o workflow **confere que o site realmente
-atualizou**, comparando o hash do bundle recém-buildado com o que está sendo
-servido em produção. Se não bater, o workflow falha — foi exatamente esse tipo
-de deploy silenciosamente antigo que deixou o site servindo uma build de dias
-atrás.
+### Proteções
 
-### Dois cuidados embutidos
+- **O `.env` nunca é tocado.** Fica fora do git e guarda o SMTP. Sem ele o
+  `checkMailConfig` em `main.go` derruba o servidor de propósito — é o
+  comportamento correto, mas o deploy não pode provocá-lo.
+- **Só mexe em produção depois de validar o pacote** (binário e `dist/index.html`
+  presentes). Download truncado não derruba o site.
+- **Rollback automático:** se o serviço não subir, o script restaura
+  `portfolio.prev` e `dist.prev`, reinicia e sai com erro.
+- **`VITE_API_URL` vai vazia** no build. Indefinida, `lib/api.ts` cai no default
+  `http://localhost:8080` e o site publicado chamaria a máquina do visitante.
 
-- **O `.env` nunca é tocado.** Ele fica fora do git e guarda o SMTP. O
-  `--delete` do rsync é aplicado só na pasta `dist/`, que é 100% gerada. Se o
-  `.env` sumisse, o `checkMailConfig` em `main.go` derrubaria o servidor de
-  propósito e o site sairia do ar.
-- **`VITE_API_URL` é definida como vazia** no build. Se ficar indefinida,
-  `lib/api.ts` cai no default `http://localhost:8080` e o site publicado passa a
-  chamar a máquina do visitante. Vazia, as chamadas viram `/api/...` relativas —
-  que é como a build atual em produção já funciona.
-
-## 1. Descobrir os valores na VPS
+## Operação
 
 ```bash
-systemctl list-units --type=service | grep -iE 'portfolio|site|go'   # -> SERVICE_NAME
-systemctl show -p WorkingDirectory,ExecStart NOME_DO_SERVICO         # -> DEPLOY_PATH
+# forçar agora, sem esperar o ciclo
+sudo systemctl start portfolio-autodeploy.service
+
+# acompanhar
+journalctl -u portfolio-autodeploy -n 40 --no-pager
+systemctl list-timers portfolio-autodeploy.timer
+
+# qual versão está instalada
+cat /var/lib/portfolio-autodeploy/deployed-sha
+
+# rollback manual
+cd /opt/portfolio
+sudo systemctl stop portfolio
+sudo cp -a portfolio.prev portfolio && sudo rm -rf dist && sudo cp -a dist.prev dist
+sudo chown -R portfolio:portfolio portfolio dist && sudo systemctl start portfolio
 ```
 
-Confirme que o `WorkingDirectory` é a pasta que contém o `.env` — o
-`envfile.Load(".env")` lê o arquivo **relativo ao diretório de trabalho** do
-processo, então um `WorkingDirectory` errado faz o backend subir sem SMTP.
+Para mudar o intervalo, edite `OnUnitActiveSec` no `.timer` e rode
+`sudo systemctl daemon-reload && sudo systemctl restart portfolio-autodeploy.timer`.
 
-## 2. Criar a chave de deploy
+## Reinstalar do zero
 
-Na VPS, com o usuário que vai receber o deploy:
+O instalador é idempotente — reescreve script, unit e timer:
 
 ```bash
-ssh-keygen -t ed25519 -f ~/.ssh/gh_deploy -N '' -C 'github-actions'
-cat ~/.ssh/gh_deploy.pub >> ~/.ssh/authorized_keys
-chmod 600 ~/.ssh/authorized_keys
-cat ~/.ssh/gh_deploy          # <- a chave PRIVADA, vai no secret VPS_SSH_KEY
+sudo bash ~/deploy-novo/instalar-autodeploy.sh
 ```
 
-Apague o arquivo da chave privada da VPS depois de copiar (`rm ~/.ssh/gh_deploy`);
-ela só precisa existir nos secrets do GitHub.
+## Secrets
 
-## 3. Permitir o restart sem senha
+**Nenhum é necessário.** O workflow usa apenas o `GITHUB_TOKEN` automático
+(com `contents: write`, para publicar a release).
 
-```bash
-sudo visudo -f /etc/sudoers.d/portfolio-deploy
-```
-
-```
-SEU_USUARIO ALL=(root) NOPASSWD: /usr/bin/systemctl stop SERVICE, /usr/bin/systemctl start SERVICE, /usr/bin/systemctl is-active SERVICE, /usr/bin/journalctl -u SERVICE *
-```
-
-Troque `SEU_USUARIO` e `SERVICE`. Restringir aos comandos exatos evita dar sudo
-irrestrito a uma chave automatizada.
-
-## 4. Cadastrar no GitHub
-
-**Settings → Secrets and variables → Actions**
-
-Em *Secrets*:
-
-| Secret | Valor |
-| --- | --- |
-| `VPS_HOST` | IP ou host da VPS (ex.: `187.110.167.76`) |
-| `VPS_USER` | usuário do SSH |
-| `VPS_SSH_KEY` | conteúdo do `gh_deploy` (chave privada, inteira) |
-
-Em *Variables*:
-
-| Variable | Valor | Obrigatória |
-| --- | --- | --- |
-| `DEPLOY_PATH` | pasta do app na VPS (ex.: `/opt/portfolio`) | sim |
-| `SERVICE_NAME` | nome do serviço systemd | sim |
-| `VPS_PORT` | porta do SSH (padrão `22`) | não |
-| `VPS_ARCH` | `amd64` (padrão) ou `arm64` | não |
-| `SITE_URL` | padrão `https://michellycruz.com.br` | não |
-
-## 5. Rodar
-
-Push no `master`, ou **Actions → Deploy → Run workflow** para disparar à mão.
-
-## Rollback
-
-O binário anterior fica salvo como `portfolio.prev`:
-
-```bash
-cd $DEPLOY_PATH
-sudo systemctl stop SERVICE && mv -f portfolio.prev portfolio && sudo systemctl start SERVICE
-```
-
-## Serviço systemd (referência)
-
-Caso precise recriar a unit:
-
-```ini
-[Unit]
-Description=Portfolio (Go)
-After=network.target
-
-[Service]
-Type=simple
-User=SEU_USUARIO
-WorkingDirectory=/opt/portfolio
-ExecStart=/opt/portfolio/portfolio
-Environment=STATIC_DIR=/opt/portfolio/dist
-Environment=FRONTEND_ORIGIN=https://michellycruz.com.br
-Restart=on-failure
-RestartSec=3
-
-[Install]
-WantedBy=multi-user.target
-```
-
-O `PORT` e as credenciais SMTP vêm do `.env` em `WorkingDirectory`. Variáveis
-reais do ambiente têm precedência sobre o arquivo (ver `envfile.Load`).
+Os secrets `VPS_HOST`, `VPS_USER`, `VPS_SSH_KEY` e as variables `DEPLOY_PATH` e
+`SERVICE_NAME` sobraram da tentativa por SSH e **podem ser apagados**. Se apagar
+o `VPS_SSH_KEY`, remova também a chave pública correspondente do
+`~/.ssh/authorized_keys` na VPS.
