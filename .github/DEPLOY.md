@@ -52,9 +52,13 @@ baixa um pacote de um commit que ainda estava compilando.
   `checkMailConfig` em `main.go` derruba o servidor de propósito — é o
   comportamento correto, mas o deploy não pode provocá-lo.
 - **Só mexe em produção depois de validar o pacote** (binário e `dist/index.html`
-  presentes). Download truncado não derruba o site.
+  presentes, e o `COMMIT` de dentro do pacote batendo com o SHA anunciado na
+  release). Download truncado não derruba o site.
 - **Rollback automático:** se o serviço não subir, o script restaura
-  `portfolio.prev` e `dist.prev`, reinicia e sai com erro.
+  `portfolio.prev` e `dist.prev`, reinicia e sai com erro. O `deployed-sha`
+  não é gravado nesse caso, então o ciclo seguinte tenta o mesmo commit de
+  novo — um commit quebrado reclama no journal a cada intervalo até a correção
+  subir, em vez de falhar uma vez e silenciar.
 - **`VITE_API_URL` vai vazia** no build. Indefinida, `lib/api.ts` cai no default
   `http://localhost:8080` e o site publicado chamaria a máquina do visitante.
 
@@ -83,11 +87,27 @@ Para mudar o intervalo, edite `OnUnitActiveSec` no `.timer` e rode
 
 ## Reinstalar do zero
 
-O instalador é idempotente — reescreve script, unit e timer:
+O instalador vive no repositório, em
+[`deploy/instalar-autodeploy.sh`](../deploy/instalar-autodeploy.sh). As três
+primeiras linhas da tabela acima são **geradas por ele** — a cópia em
+`/usr/local/bin` traz um aviso no cabeçalho dizendo isso. Para mudar o
+comportamento do deploy, edite o arquivo aqui e reinstale; editar direto na VPS
+perde a mudança na próxima execução.
+
+É idempotente, então a mesma linha instala do zero e atualiza:
 
 ```bash
-sudo bash ~/deploy-novo/instalar-autodeploy.sh
+# na VPS
+git clone https://github.com/michellycruz/portfolio-v2 ~/portfolio-v2   # ou: cd ~/portfolio-v2 && git pull
+sudo bash ~/portfolio-v2/deploy/instalar-autodeploy.sh
 ```
+
+Os padrões saem por variável de ambiente, sem editar o script —
+`INTERVALO=2min`, `APP_DIR=`, `SERVICE=`, `APP_USER=`, `REPO=`.
+
+O instalador cuida **só** do autodeploy. O serviço `portfolio` em si, o usuário
+`portfolio` e o `/opt/portfolio/.env` são pré-requisitos instalados à mão; se
+faltar algum, ele avisa e segue.
 
 ## Secrets
 

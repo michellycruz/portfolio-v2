@@ -1,0 +1,4 @@
+# Os scripts de deploy rodam na VPS. Com CRLF o Linux procura um interpretador
+# chamado "/usr/bin/env bash\r" e o shebang falha, entao a normalizacao do
+# Windows nao pode alcancar esses arquivos.
+*.sh text eol=lf
