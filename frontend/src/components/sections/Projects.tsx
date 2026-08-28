@@ -43,6 +43,55 @@ export function Projects({ items }: { items: Project[] }) {
     if (el) el.scrollBy({ left: direction * (el.clientWidth - 80), behavior: "smooth" });
   }
 
+  // Sem barra de rolagem, arrastar precisa funcionar de verdade: guarda onde o
+  // ponteiro desceu e o quanto a lista ja estava rolada, e move a diferenca.
+  const drag = useRef({ down: false, startX: 0, startLeft: 0, dragging: false });
+
+  function onPointerDown(event: React.PointerEvent<HTMLDivElement>) {
+    // Toque e caneta continuam com a rolagem nativa, que ja e melhor que
+    // qualquer coisa reimplementada aqui.
+    if (event.pointerType !== "mouse" || event.button !== 0) return;
+    const el = scroller.current;
+    if (!el) return;
+    drag.current = { down: true, startX: event.clientX, startLeft: el.scrollLeft, dragging: false };
+  }
+
+  function onPointerMove(event: React.PointerEvent<HTMLDivElement>) {
+    const el = scroller.current;
+    if (!el || !drag.current.down) return;
+
+    const dx = event.clientX - drag.current.startX;
+
+    // Cinco pixels de folga: um clique com a mao tremida continua sendo clique,
+    // e os atalhos de deploy e repositorio seguem clicaveis.
+    if (!drag.current.dragging) {
+      if (Math.abs(dx) < 5) return;
+      drag.current.dragging = true;
+      el.setPointerCapture(event.pointerId);
+      el.style.userSelect = "none";
+    }
+
+    el.scrollLeft = drag.current.startLeft - dx;
+  }
+
+  function endDrag(event: React.PointerEvent<HTMLDivElement>) {
+    const el = scroller.current;
+    if (el) {
+      if (el.hasPointerCapture(event.pointerId)) el.releasePointerCapture(event.pointerId);
+      el.style.userSelect = "";
+    }
+    drag.current.down = false;
+  }
+
+  // Soltar o ponteiro no fim de um arrasto dispara click no cartao que estava
+  // embaixo. Este capture engole esse click -- e so ele.
+  function onClickCapture(event: React.MouseEvent<HTMLDivElement>) {
+    if (!drag.current.dragging) return;
+    event.preventDefault();
+    event.stopPropagation();
+    drag.current.dragging = false;
+  }
+
   return (
     <section id="projetos" className="mx-auto max-w-6xl px-5 py-16">
       <div className="flex flex-wrap items-end justify-between gap-4">
@@ -50,7 +99,7 @@ export function Projects({ items }: { items: Project[] }) {
 
         <div className="flex items-center gap-3 pb-6">
           <span className="hidden font-[var(--font-mono-brand)] text-xs text-ink/60 sm:block dark:text-white/60">
-            passe o mouse para ver os detalhes
+            arraste para o lado · passe o mouse para ver os detalhes
           </span>
           <div className="flex gap-2">
             <button
@@ -78,10 +127,18 @@ export function Projects({ items }: { items: Project[] }) {
       <div
         ref={scroller}
         onScroll={readEdges}
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={endDrag}
+        onPointerCancel={endDrag}
+        onClickCapture={onClickCapture}
         tabIndex={0}
         role="group"
-        aria-label="Linha do tempo dos projetos, com rolagem horizontal"
-        className="-mx-2 snap-x snap-mandatory overflow-x-auto px-2 pb-4 [scrollbar-width:thin]"
+        aria-label="Linha do tempo dos projetos: arraste para o lado ou use as setas"
+        // snap-proximity, e nao mandatory: com mandatory a lista puxava de volta
+        // no meio do arrasto. A barra some porque a navegacao agora e pelas
+        // setas e pelo arrasto -- as setas do teclado continuam rolando.
+        className="-mx-2 cursor-grab snap-x snap-proximity overflow-x-auto px-2 pb-4 [scrollbar-width:none] active:cursor-grabbing [&::-webkit-scrollbar]:hidden"
       >
         <div className="flex min-w-max items-start gap-8">
           {groups.map((group, gi) => (

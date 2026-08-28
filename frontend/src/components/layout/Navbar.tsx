@@ -32,8 +32,19 @@ export function Navbar() {
       }`}
     >
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
-        <a href="#topo" className="flex items-center gap-2">
-          <img src="/images/logo.png" alt="Logo Michelly Cruz" className="h-9 w-auto" />
+        {/* A logo era um PNG com o nome ja desenhado, entao as letras ficavam
+            pretas no tema escuro. Em texto, na mesma Mallory Black do desenho,
+            a cor acompanha o tema. */}
+        <a href="#topo" className="flex items-center gap-2" aria-label="Michelly Cruz, ir para o topo">
+          <span
+            aria-hidden="true"
+            className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-coral font-display text-[10px] leading-none text-white"
+          >
+            MC
+          </span>
+          <span className="font-display text-xl leading-none tracking-tight text-ink sm:text-2xl dark:text-white">
+            Michelly Cruz
+          </span>
         </a>
 
         <ul className="hidden items-center gap-8 md:flex">
