@@ -346,9 +346,7 @@ func Get() Content {
 				Description: "Vitrine com busca e carrinho em React, com o estado num Context. A API que alimentava a lista fechou e o site travava carregando: troquei a fonte de dados e dei tratamento à falha.",
 				Tech:        []string{"react", "js", "css"},
 				ImageURL:    "/images/projects/carrinho_de_compras.png",
-				// O deploy no Vercel ainda serve o bundle anterior a correcao da API.
-				// Reative este link quando a Vercel publicar o commit dc94d1c.
-				LinkURL:     "",
+				LinkURL:     "https://carrinho-de-compras-delta.vercel.app",
 				RepoURL:     "https://github.com/michellycruz/carrinho_de_compras",
 				Private:     false,
 			},
