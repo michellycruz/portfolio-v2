@@ -11,7 +11,7 @@ function Stat({ label, value }: { label: string; value: string }) {
   return (
     <div className="min-w-36 flex-1 rounded-lg border-2 border-ink px-4 py-3 dark:border-white/80">
       <p className="text-xs text-ink-soft dark:text-white/80">{label}</p>
-      <p className="mt-0.5 font-[var(--font-mono-brand)] text-2xl font-semibold text-ink dark:text-white">{value}</p>
+      <p className="mt-0.5 font-mono-brand text-2xl font-semibold text-ink dark:text-white">{value}</p>
     </div>
   );
 }

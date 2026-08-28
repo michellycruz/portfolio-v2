@@ -58,7 +58,7 @@ export function Skills({ infraSkills, infraHighlights, categories }: SkillsProps
         </Panel>
       </motion.div>
 
-      <h3 className="mt-16 mb-10 text-center font-[var(--font-mono-brand)] text-2xl text-ink dark:text-white">
+      <h3 className="mt-16 mb-10 text-center font-mono-brand text-2xl text-ink dark:text-white">
         Tecnologias
       </h3>
 

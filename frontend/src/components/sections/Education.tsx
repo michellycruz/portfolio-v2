@@ -36,7 +36,7 @@ export function Education({ items, institutions }: { items: EducationItem[]; ins
                 transition={{ duration: 0.5, delay: i * 0.08 }}
                 className={i > 0 ? "mt-6 border-t-2 border-dashed border-ink/20 pt-6 dark:border-white/20" : ""}
               >
-                <h3 className="font-[var(--font-mono-brand)] text-lg text-ink dark:text-white">{edu.course}</h3>
+                <h3 className="font-mono-brand text-lg text-ink dark:text-white">{edu.course}</h3>
                 <p className="mt-1 text-ink-soft dark:text-white/80">{edu.institution}</p>
                 <p className="mt-1 text-sm opacity-50">
                   {edu.hours ? `${edu.period} · ${edu.hours}` : edu.period}

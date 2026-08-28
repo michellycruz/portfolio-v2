@@ -9,7 +9,7 @@ import { sendContactMessage } from "../../lib/api";
 type Status = "idle" | "sending" | "success" | "error";
 
 const inputClasses =
-  "w-full rounded-lg border-2 border-ink bg-white px-4 py-3 font-[var(--font-body)] text-ink outline-none transition-shadow focus:shadow-brutal-sm dark:border-white/60 dark:bg-white/95";
+  "w-full rounded-lg border-2 border-ink bg-white px-4 py-3 font-body text-ink outline-none transition-shadow focus:shadow-brutal-sm dark:border-white/60 dark:bg-white/95";
 
 export function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });

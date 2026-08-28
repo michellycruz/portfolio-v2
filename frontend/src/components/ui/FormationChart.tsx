@@ -24,7 +24,7 @@ export function FormationChart({ institutions }: { institutions: Institution[] }
 
   return (
     <div>
-      <h3 className="font-[var(--font-mono-brand)] text-sm text-ink dark:text-white">Formação por área</h3>
+      <h3 className="font-mono-brand text-sm text-ink dark:text-white">Formação por área</h3>
       <p className="mt-0.5 mb-3 text-xs opacity-50">Número de cursos concluídos em cada área</p>
 
       <ul className="flex flex-col gap-2.5">

@@ -43,7 +43,7 @@ function InstitutionRow({ institution }: { institution: Institution }) {
           aria-hidden="true"
           className={`shrink-0 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
         />
-        <span className="font-[var(--font-mono-brand)] text-ink dark:text-white">{institution.name}</span>
+        <span className="font-mono-brand text-ink dark:text-white">{institution.name}</span>
         <span className="ml-auto shrink-0 text-xs opacity-50">
           {total} {total === 1 ? "curso" : "cursos"}
         </span>

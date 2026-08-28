@@ -98,7 +98,7 @@ export function Projects({ items }: { items: Project[] }) {
         <SectionHeading>Projetos</SectionHeading>
 
         <div className="flex items-center gap-3 pb-6">
-          <span className="hidden font-[var(--font-mono-brand)] text-xs text-ink/60 sm:block dark:text-white/60">
+          <span className="hidden font-mono-brand text-xs text-ink/60 sm:block dark:text-white/60">
             arraste para o lado · passe o mouse para ver os detalhes
           </span>
           <div className="flex gap-2">
@@ -146,7 +146,7 @@ export function Projects({ items }: { items: Project[] }) {
               {/* Marco do ano: o traco segue ate o fim do grupo, e os grupos
                   vizinhos continuam o mesmo eixo. */}
               <div className="flex items-center gap-3">
-                <span className="rounded-full border-2 border-ink bg-coral px-3 py-1 font-[var(--font-mono-brand)] text-sm font-bold text-white shadow-brutal-sm dark:border-white/70">
+                <span className="rounded-full border-2 border-ink bg-coral px-3 py-1 font-mono-brand text-sm font-bold text-white shadow-brutal-sm dark:border-white/70">
                   {group.year}
                 </span>
                 <span className="h-0.5 flex-1 bg-ink/25 dark:bg-white/25" />
@@ -201,7 +201,7 @@ function ProjectCard({ project, delay }: { project: Project; delay: number }) {
             {project.tech.map((t) => (
               <span
                 key={t}
-                className="rounded border border-white/40 px-1.5 py-0.5 font-[var(--font-mono-brand)] text-[9px] uppercase tracking-wide text-white/80"
+                className="rounded border border-white/40 px-1.5 py-0.5 font-mono-brand text-[9px] uppercase tracking-wide text-white/80"
               >
                 {techIcon(t).label}
               </span>
@@ -211,7 +211,7 @@ function ProjectCard({ project, delay }: { project: Project; delay: number }) {
       </div>
 
       <div className="flex items-center justify-between gap-2 px-3 py-2">
-        <h3 className="truncate font-[var(--font-mono-brand)] text-xs font-semibold text-ink dark:text-white">
+        <h3 className="truncate font-mono-brand text-xs font-semibold text-ink dark:text-white">
           {project.title}
         </h3>
 
@@ -263,7 +263,7 @@ function NoPreview({ project }: { project: Project }) {
   return (
     <div className="flex h-full w-full flex-col items-center justify-center gap-2 bg-[repeating-linear-gradient(45deg,transparent,transparent_6px,rgba(0,0,0,0.05)_6px,rgba(0,0,0,0.05)_12px)] dark:bg-[repeating-linear-gradient(45deg,transparent,transparent_6px,rgba(255,255,255,0.06)_6px,rgba(255,255,255,0.06)_12px)]">
       {main.src && <img src={main.src} alt={main.label} className="h-9 w-9 object-contain opacity-80" />}
-      <span className="flex items-center gap-1 font-[var(--font-mono-brand)] text-[10px] uppercase tracking-wide text-ink/50 dark:text-white/50">
+      <span className="flex items-center gap-1 font-mono-brand text-[10px] uppercase tracking-wide text-ink/50 dark:text-white/50">
         {project.private && <Lock size={10} />}
         {project.private ? "projeto interno" : "sem prévia"}
       </span>

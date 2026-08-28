@@ -40,7 +40,7 @@ interface PanelTitleProps {
 export function PanelTitle({ children, accent = "none", icon, className = "" }: PanelTitleProps) {
   return (
     <div
-      className={`flex min-h-16 items-center justify-between gap-3 rounded-t-[10px] border-b-2 border-ink px-5 py-3 font-[var(--font-mono-brand)] text-lg tracking-tight dark:border-white/80 ${accentClasses[accent]} ${className}`}
+      className={`flex min-h-16 items-center justify-between gap-3 rounded-t-[10px] border-b-2 border-ink px-5 py-3 font-mono-brand text-lg tracking-tight dark:border-white/80 ${accentClasses[accent]} ${className}`}
     >
       <span>{children}</span>
       {icon}
@@ -49,5 +49,5 @@ export function PanelTitle({ children, accent = "none", icon, className = "" }: 
 }
 
 export function PanelBody({ children, className = "" }: { children: ReactNode; className?: string }) {
-  return <div className={`p-6 font-[var(--font-body)] text-base leading-relaxed ${className}`}>{children}</div>;
+  return <div className={`p-6 font-body text-base leading-relaxed ${className}`}>{children}</div>;
 }

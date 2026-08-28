@@ -65,7 +65,7 @@ export function Hero({ profile }: { profile: Profile }) {
                 {p}
               </p>
             ))}
-            <span className="inline-flex items-center gap-2 rounded-full border-2 border-ink bg-butter px-4 py-2 font-[var(--font-mono-brand)] text-xs font-semibold text-ink">
+            <span className="inline-flex items-center gap-2 rounded-full border-2 border-ink bg-butter px-4 py-2 font-mono-brand text-xs font-semibold text-ink">
               {profile.profileBadge}
             </span>
 

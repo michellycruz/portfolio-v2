@@ -23,7 +23,7 @@ export function Experience({ items }: { items: ExperienceItem[] }) {
                 transition={{ duration: 0.5, delay: i * 0.08 }}
                 className={i > 0 ? "mt-8 border-t-2 border-dashed border-ink/20 pt-8 dark:border-white/20" : ""}
               >
-                <h3 className="font-[var(--font-mono-brand)] text-xl text-ink dark:text-white">{exp.company}</h3>
+                <h3 className="font-mono-brand text-xl text-ink dark:text-white">{exp.company}</h3>
                 <p className="mt-1 font-semibold text-coral">{exp.role}</p>
                 <p className="mt-1 text-sm opacity-50">{exp.period}</p>
 

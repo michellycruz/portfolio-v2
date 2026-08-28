@@ -42,17 +42,17 @@ export function Navbar() {
           >
             MC
           </span>
-          <span className="font-display text-xl leading-none tracking-tight text-ink sm:text-2xl dark:text-white">
+          <span className="font-display whitespace-nowrap text-xl leading-none tracking-tight text-ink sm:text-2xl dark:text-white">
             Michelly Cruz
           </span>
         </a>
 
-        <ul className="hidden items-center gap-8 md:flex">
+        <ul className="hidden items-center gap-5 md:flex lg:gap-8">
           {links.map((link) => (
             <li key={link.href}>
               <a
                 href={link.href}
-                className="font-[var(--font-mono-brand)] text-sm tracking-wide text-ink transition-colors hover:text-coral dark:text-white"
+                className="font-mono-brand text-sm tracking-wide text-ink transition-colors hover:text-coral dark:text-white"
               >
                 {link.label}
               </a>
@@ -92,7 +92,7 @@ export function Navbar() {
                 <a
                   href={link.href}
                   onClick={() => setOpen(false)}
-                  className="block py-3 font-[var(--font-mono-brand)] text-base text-ink dark:text-white"
+                  className="block py-3 font-mono-brand text-base text-ink dark:text-white"
                 >
                   {link.label}
                 </a>
