@@ -8,8 +8,9 @@ export const fallbackContent: Content = {
     role: "Analista de Sistemas",
     location: "Espírito Santo, Brasil",
     summary: [
-      "Analista de Sistemas na Hostbraza, onde transito entre desenvolvimento e atendimento: crio plugins e aplicações para WordPress em PHP, desenvolvo aplicações e automações em PHP, Go e React com apoio de IA e atendo clientes de hospedagem.",
-      "Venho do suporte técnico e da análise de sistemas, com vivência em atendimento via GLPI, consultas SQL, levantamento de requisitos, documentação técnica e protótipos em Figma e Balsamiq. Dessa origem trago o hábito de documentar, testar e traduzir necessidade de negócio em solução técnica.",
+      "Analista de Sistemas na Hostbraza. Meu trabalho principal hoje é o checkout do novo ecossistema de vendas da empresa: carrinho, pagamento e área do cliente em React e TypeScript, sobre uma API própria em Go — é ela que valida o acesso, conversa com o gateway de pagamento e concentra as integrações, sem que nenhuma credencial chegue ao navegador.",
+      "Gosto do que a área de pagamento exige: parcelamento que confere com o que o meio de pagamento realmente oferece, documento conferido antes de sair do navegador, confirmação assíncrona tratada como assíncrona e a garantia de que a mesma compra não seja cobrada duas vezes. São detalhes que só aparecem quando há dinheiro de verdade no fluxo — e é onde mais aprendo.",
+      "Venho do suporte técnico e da análise de sistemas: chamados no GLPI, consultas SQL, levantamento de requisitos, documentação técnica e protótipos em Figma e Balsamiq. Dessa origem trago o hábito de documentar, testar e traduzir necessidade de negócio em solução técnica. Desenvolvo com apoio de IA (Claude Code) no dia a dia, revisando o que entra em produção.",
     ],
     profileBadge: "Planejador Analista (PA)",
     behavior: [
@@ -33,14 +34,16 @@ export const fallbackContent: Content = {
       role: "Analista de Sistemas",
       period: "Abril 2026 - Atual",
       bullets: [
-        "Desenvolvimento de plugins e aplicações para WordPress utilizando PHP, com apoio de IA para acelerar implementação, refatoração e testes.",
-        "Criação de aplicações e automações em PHP, Go e React, utilizando o Claude Code como assistente de desenvolvimento.",
+        "Desenvolvimento do checkout do novo ecossistema de vendas da empresa (projeto interno): carrinho, cadastro, pagamento e resumo do pedido em React e TypeScript, consumindo uma API própria em Go.",
+        "Integração com gateway de pagamento: cartão com parcelamento coerente com o plano contratado, cupom, webhook de confirmação e idempotência para impedir cobrança duplicada.",
+        "Autenticação via OIDC com validação de token na API em Go, vínculo entre a conta recém-criada e o cliente já existente na base, e credenciais das integrações restritas ao servidor.",
+        "Validação dos dados brasileiros do fluxo de compra: CPF e CNPJ conferidos ainda no navegador, endereço derivado do CEP e adaptação dos campos ao formato esperado pela plataforma de faturamento.",
+        "Desenvolvimento de plugins e aplicações para WordPress em PHP e manutenção das aplicações web da empresa, entre correção de bugs e novas funcionalidades.",
+        "Desenvolvimento orientado por IA (AI-Assisted Development) com o Claude Code: engenharia de prompts para implementação, refatoração, testes e documentação, com revisão minha do que vai para produção.",
         "Atendimento N1 aos clientes de hospedagem.",
-        "Desenvolvimento orientado por IA (AI-Assisted Development), utilizando engenharia de prompts para geração de código, documentação e otimização de processos.",
-        "Correção de bugs, implementação de novas funcionalidades e manutenção de aplicações web.",
       ],
       results:
-        "Aumento da produtividade no desenvolvimento através do uso estratégico de IA, redução do tempo de entrega de funcionalidades, resolução ágil de chamados técnicos e melhoria da experiência dos clientes de hospedagem.",
+        "Checkout levado do zero ao ponto de operar, com o fluxo de pagamento coberto contra os casos que só aparecem com dinheiro de verdade: cobrança duplicada, confirmação perdida e parcelamento incompatível com o meio de pagamento. Somam-se entregas mais rápidas pelo uso estratégico de IA e resolução ágil dos chamados de hospedagem.",
     },
     {
       company: "Secretaria de Estado da Educação - SEDU",
@@ -234,7 +237,7 @@ export const fallbackContent: Content = {
   skillCategories: [
     { title: "Prototipação", skills: ["figma", "balsamiq"] },
     { title: "Ferramentas", skills: ["sql", "gitlab", "git", "github-icon", "excel", "teams", "word", "outlook", "notion"] },
-    { title: "Linguagens e Frameworks", skills: ["html", "css", "js", "bootstrap", "sass", "react", "tailwind"] },
+    { title: "Linguagens e Frameworks", skills: ["html", "css", "js", "ts", "php", "go", "bootstrap", "sass", "react", "tailwind"] },
     { title: "Inteligência Artificial", skills: ["ia"] },
   ],
   projects: [
