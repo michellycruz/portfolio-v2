@@ -87,10 +87,16 @@ type SkillCategory struct {
 
 // Project is a portfolio project card.
 type Project struct {
-	Title    string   `json:"title"`
-	Tech     []string `json:"tech"`
-	ImageURL string   `json:"imageUrl"`
-	LinkURL  string   `json:"linkUrl"`
+	Title       string   `json:"title"`
+	Year        string   `json:"year"`
+	Description string   `json:"description"`
+	Tech        []string `json:"tech"`
+	ImageURL    string   `json:"imageUrl"`
+	LinkURL     string   `json:"linkUrl"`
+	// RepoURL fica vazio quando o repositorio e privado: a UI troca o atalho
+	// para o codigo pelo selo de projeto interno.
+	RepoURL string `json:"repoUrl"`
+	Private bool   `json:"private"`
 }
 
 // Content aggregates the entire portfolio payload served to the frontend.

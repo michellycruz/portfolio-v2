@@ -67,9 +67,14 @@ export interface SkillCategory {
 
 export interface Project {
   title: string;
+  year: string;
+  description: string;
   tech: string[];
   imageUrl: string;
   linkUrl: string;
+  /** Vazio quando o repositorio e privado. */
+  repoUrl: string;
+  private: boolean;
 }
 
 export interface Content {
