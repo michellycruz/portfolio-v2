@@ -20,7 +20,7 @@ func Get() Content {
 				{Label: "Planejador", Percent: 33},
 				{Label: "Analista", Percent: 33},
 			},
-			PhotoURL:     "/images/avatar-2f15bba3.png",
+			PhotoURL:     "/images/foto-pessoal.png",
 			ResumeURL:    "/resume/curriculo_michelly.pdf",
 			Social: []SocialLink{
 				{Name: "LinkedIn", URL: "https://www.linkedin.com/in/michxcrz/", Icon: "linkedin"},

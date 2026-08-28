@@ -19,7 +19,7 @@ export function Hero({ profile }: { profile: Profile }) {
           <img
             src={profile.photoUrl}
             alt={profile.name}
-            className="w-64 rounded-full border-2 border-ink object-cover shadow-brutal-lg [image-rendering:pixelated] dark:border-white/80"
+            className="w-64 rounded-full border-2 border-ink object-cover shadow-brutal-lg dark:border-white/80"
           />
         </div>
 
