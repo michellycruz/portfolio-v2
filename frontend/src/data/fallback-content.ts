@@ -8,9 +8,8 @@ export const fallbackContent: Content = {
     role: "Analista de Sistemas",
     location: "Espírito Santo, Brasil",
     summary: [
-      "Analista de Sistemas na Hostbraza. Meu trabalho principal hoje é o checkout do novo ecossistema de vendas da empresa: carrinho, pagamento e área do cliente em React e TypeScript, sobre uma API própria em Go — é ela que valida o acesso, conversa com o gateway de pagamento e concentra as integrações, sem que nenhuma credencial chegue ao navegador.",
-      "Gosto do que a área de pagamento exige: parcelamento que confere com o que o meio de pagamento realmente oferece, documento conferido antes de sair do navegador, confirmação assíncrona tratada como assíncrona e a garantia de que a mesma compra não seja cobrada duas vezes. São detalhes que só aparecem quando há dinheiro de verdade no fluxo — e é onde mais aprendo.",
-      "Venho do suporte técnico e da análise de sistemas: chamados no GLPI, consultas SQL, levantamento de requisitos, documentação técnica e protótipos em Figma e Balsamiq. Dessa origem trago o hábito de documentar, testar e traduzir necessidade de negócio em solução técnica. Desenvolvo com apoio de IA (Claude Code) no dia a dia, revisando o que entra em produção.",
+      "Analista de Sistemas na Hostbraza. Hoje construo o checkout do novo ecossistema de vendas da empresa: carrinho, pagamento e área do cliente em React e TypeScript, sobre uma API própria em Go que valida o acesso e concentra as integrações.",
+      "Venho do suporte técnico e da análise de sistemas — GLPI, SQL, levantamento de requisitos e protótipos —, e dali trago o hábito de documentar e testar. Desenvolvo com apoio de IA, revisando o que entra em produção.",
     ],
     profileBadge: "Planejador Analista (PA)",
     behavior: [
@@ -34,16 +33,15 @@ export const fallbackContent: Content = {
       role: "Analista de Sistemas",
       period: "Abril 2026 - Atual",
       bullets: [
-        "Desenvolvimento do checkout do novo ecossistema de vendas da empresa (projeto interno): carrinho, cadastro, pagamento e resumo do pedido em React e TypeScript, consumindo uma API própria em Go.",
-        "Integração com gateway de pagamento: cartão com parcelamento coerente com o plano contratado, cupom, webhook de confirmação e idempotência para impedir cobrança duplicada.",
-        "Autenticação via OIDC com validação de token na API em Go, vínculo entre a conta recém-criada e o cliente já existente na base, e credenciais das integrações restritas ao servidor.",
-        "Validação dos dados brasileiros do fluxo de compra: CPF e CNPJ conferidos ainda no navegador, endereço derivado do CEP e adaptação dos campos ao formato esperado pela plataforma de faturamento.",
-        "Desenvolvimento de plugins e aplicações para WordPress em PHP e manutenção das aplicações web da empresa, entre correção de bugs e novas funcionalidades.",
-        "Desenvolvimento orientado por IA (AI-Assisted Development) com o Claude Code: engenharia de prompts para implementação, refatoração, testes e documentação, com revisão minha do que vai para produção.",
+        "Desenvolvimento do checkout do novo ecossistema de vendas da empresa (projeto interno): carrinho, cadastro, pagamento e resumo do pedido em React e TypeScript, sobre uma API própria em Go.",
+        "Integração com gateway de pagamento: parcelamento coerente com o plano contratado, cupom, webhook de confirmação e idempotência contra cobrança duplicada.",
+        "Autenticação via OIDC validada na API em Go, vínculo com o cliente já existente na base e CPF, CNPJ e endereço conferidos ainda no navegador.",
+        "Plugins e aplicações para WordPress em PHP, além da manutenção das aplicações web da empresa.",
+        "Desenvolvimento orientado por IA com o Claude Code, com revisão minha do que vai para produção.",
         "Atendimento N1 aos clientes de hospedagem.",
       ],
       results:
-        "Checkout levado do zero ao ponto de operar, com o fluxo de pagamento coberto contra os casos que só aparecem com dinheiro de verdade: cobrança duplicada, confirmação perdida e parcelamento incompatível com o meio de pagamento. Somam-se entregas mais rápidas pelo uso estratégico de IA e resolução ágil dos chamados de hospedagem.",
+        "Checkout levado do zero ao ponto de operar, com o fluxo de pagamento coberto contra cobrança duplicada, confirmação perdida e parcelamento incompatível com o meio de pagamento.",
     },
     {
       company: "Secretaria de Estado da Educação - SEDU",
