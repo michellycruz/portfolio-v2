@@ -4,11 +4,11 @@
 // e tudo que nao e fundo vira fundo, entao sobra o disco intacto.
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 const { decode, encode } = require('./png.cjs');
 
 const IMAGES = path.join(__dirname, '..', 'public', 'images');
 const SRC = path.join(IMAGES, 'foto-pessoal.png');  // so o circulo sai daqui
-const OUT = path.join(IMAGES, 'foto-pixel.png');
 const GRID = 48;
 const SIZE = 528;
 const CELL = SIZE / GRID; // 11px
@@ -172,5 +172,32 @@ for (const [key, c] of cells) {
   }
 }
 
-fs.writeFileSync(OUT, encode({ width: SIZE, height: SIZE, px: canvas }));
-console.log(OUT, cells.size, 'celulas');
+// O nome carrega o hash do conteudo. Sem isso a arte nova chega num caminho
+// que a CDN ja tem em cache (max-age de 4h) e o site continua mostrando a
+// anterior por horas -- foi o que aconteceu na primeira versao. Arte diferente,
+// URL diferente, e nao ha cache velho para servir.
+const png = encode({ width: SIZE, height: SIZE, px: canvas });
+const hash = crypto.createHash('sha1').update(png).digest('hex').slice(0, 8);
+const name = `avatar-${hash}.png`;
+
+for (const old of fs.readdirSync(IMAGES)) {
+  if (/^avatar-[0-9a-f]{8}.png$/.test(old) && old !== name) fs.unlinkSync(path.join(IMAGES, old));
+}
+fs.writeFileSync(path.join(IMAGES, name), png);
+
+// A URL vive no conteudo, servida pela API e espelhada no fallback. Trocar o
+// nome sem trocar os dois deixaria o site apontando para um arquivo que nao
+// existe mais, entao o gerador cuida disso.
+const url = `/images/${name}`;
+const patches = [
+  ['../../backend/internal/content/data.go', /PhotoURL:( +)"[^"]*"/, (m, sp) => `PhotoURL:${sp}"${url}"`],
+  ['../src/data/fallback-content.ts', /photoUrl: "[^"]*"/, () => `photoUrl: "${url}"`],
+];
+for (const [rel, re, replacement] of patches) {
+  const file = path.join(__dirname, rel);
+  const before = fs.readFileSync(file, 'utf8');
+  if (!re.test(before)) throw new Error('nao achei a URL da foto em ' + rel);
+  fs.writeFileSync(file, before.replace(re, replacement));
+}
+
+console.log(name + ':', cells.size, 'celulas, URL atualizada no backend e no fallback');

@@ -18,7 +18,7 @@ export const fallbackContent: Content = {
       { label: "Planejador", percent: 33 },
       { label: "Analista", percent: 33 },
     ],
-    photoUrl: "/images/foto-pixel.png",
+    photoUrl: "/images/avatar-8a6db505.png",
     resumeUrl: "/resume/curriculo_michelly.pdf",
     social: [
       { name: "LinkedIn", url: "https://www.linkedin.com/in/michxcrz/", icon: "linkedin" },
