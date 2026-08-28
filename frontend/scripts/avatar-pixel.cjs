@@ -177,7 +177,13 @@ for (const [key, c] of cells) {
 // anterior por horas -- foi o que aconteceu na primeira versao. Arte diferente,
 // URL diferente, e nao ha cache velho para servir.
 const png = encode({ width: SIZE, height: SIZE, px: canvas });
-const hash = crypto.createHash('sha1').update(png).digest('hex').slice(0, 8);
+// O sal entra no hash so para poder abandonar uma URL sem mudar a arte. Subiu
+// para 2 quando o Cloudflare guardou o index.html debaixo do caminho da imagem
+// (o servidor respondia 200 com a pagina para arquivo inexistente, ja
+// corrigido) e passou a servir HTML no lugar do PNG por horas: o unico jeito
+// de sair na frente do cache, sem acesso ao painel, e mudar de caminho.
+const NAME_SALT = '2';
+const hash = crypto.createHash('sha1').update(NAME_SALT).update(png).digest('hex').slice(0, 8);
 const name = `avatar-${hash}.png`;
 
 for (const old of fs.readdirSync(IMAGES)) {

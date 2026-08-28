@@ -4,6 +4,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"path/filepath"
 	"strings"
 	"time"
 
@@ -94,13 +95,25 @@ func checkMailConfig(cfg contact.Config, staticDir string) {
 
 // spaFallback serves static files when they exist and falls back to
 // index.html otherwise, so client-side routing works on refresh/deep links.
-func spaFallback(dir string, fs http.Handler) http.Handler {
+//
+// Um caminho com extensao nao entra nessa regra: ele pede um arquivo, e
+// arquivo que nao existe responde 404. Devolver o index.html com 200 para
+// /images/foo.png fez o Cloudflare guardar a pagina inteira debaixo da URL da
+// imagem, com quatro horas de validade -- a imagem certa chegou depois e nao
+// teve como aparecer. Alem disso, 200 em asset errado esconde o erro: o
+// caminho quebrado parece funcionar ate alguem repara que veio HTML.
+func spaFallback(dir string, fileServer http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		path := dir + r.URL.Path
-		if info, err := os.Stat(path); err == nil && !info.IsDir() {
-			fs.ServeHTTP(w, r)
+		if info, err := os.Stat(dir + r.URL.Path); err == nil && !info.IsDir() {
+			fileServer.ServeHTTP(w, r)
 			return
 		}
+
+		if filepath.Ext(r.URL.Path) != "" {
+			http.NotFound(w, r)
+			return
+		}
+
 		http.ServeFile(w, r, dir+"/index.html")
 	})
 }
