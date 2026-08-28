@@ -361,6 +361,18 @@ export const fallbackContent: Content = {
       private: false,
     },
     {
+      title: "Carrinho de Compras",
+      year: "2024",
+      description:
+        "Vitrine com busca e carrinho em React, com o estado num Context. A API que alimentava a lista fechou e o site travava carregando: troquei a fonte de dados e dei tratamento à falha.",
+      tech: ["react", "js", "css"],
+      imageUrl: "/images/projects/carrinho_de_compras.png",
+      // O deploy no Vercel ainda serve o bundle anterior a correcao da API.
+      linkUrl: "",
+      repoUrl: "https://github.com/michellycruz/carrinho_de_compras",
+      private: false,
+    },
+    {
       title: "Piano",
       year: "2024",
       description:

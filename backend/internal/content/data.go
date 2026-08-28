@@ -341,6 +341,18 @@ func Get() Content {
 				Private:     false,
 			},
 			{
+				Title:       "Carrinho de Compras",
+				Year:        "2024",
+				Description: "Vitrine com busca e carrinho em React, com o estado num Context. A API que alimentava a lista fechou e o site travava carregando: troquei a fonte de dados e dei tratamento à falha.",
+				Tech:        []string{"react", "js", "css"},
+				ImageURL:    "/images/projects/carrinho_de_compras.png",
+				// O deploy no Vercel ainda serve o bundle anterior a correcao da API.
+				// Reative este link quando a Vercel publicar o commit dc94d1c.
+				LinkURL:     "",
+				RepoURL:     "https://github.com/michellycruz/carrinho_de_compras",
+				Private:     false,
+			},
+			{
 				Title:       "Piano",
 				Year:        "2024",
 				Description: "Piano tocável pelo mouse ou pelo teclado, com as teclas identificadas sob demanda. Cada nota é uma amostra de áudio disparada por JavaScript.",
